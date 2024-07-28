@@ -11,7 +11,16 @@ import { RegisterComponent } from './register/register.component';
 import { FaqComponent } from './components/faq/faq.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { JwtModule } from '@auth0/angular-jwt';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { UserManagementComponent } from './user-management/user-management.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
+import { AuthInterceptor } from './utility/auth.interceptor';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -21,13 +30,28 @@ import { HttpClientModule } from '@angular/common/http';
     NavbarComponent,
     LoginComponent,
     RegisterComponent,
-    FaqComponent
+    FaqComponent,
+    UserManagementComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule  ,
     HttpClientModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatSortModule,
+    MatPaginatorModule,
+    MatTableModule,
+    MatSortModule,
+    MatIconModule,
+    MatMenuModule,
+    MatIconModule,
+    MatButtonModule,
+    MatMenuModule,
+    MatTableModule,
+    MatPaginatorModule,
 
     JwtModule.forRoot({
       config: {
@@ -35,8 +59,14 @@ import { HttpClientModule } from '@angular/common/http';
       },
     }),
 
+    BrowserAnimationsModule,
+
   ],
-  providers: [],
+  providers: [ {
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptor,
+    multi: true,
+  },],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

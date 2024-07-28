@@ -961,6 +961,94 @@ section {
   position: relative;
   padding-bottom: 12px;
 }
+.section {
+  padding: 20px;
+}
+
+.container {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.titre-gras {
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+.cadre {
+  border-radius: 8px;
+  padding: 20px;
+  background-color: #f9f9f9;
+}
+
+.search-box {
+  margin-bottom: 20px;
+}
+
+.search-input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.mat-list-table {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th.mat-header-cell, td.mat-cell {
+  padding: 10px;
+  text-align: left;
+}
+
+th.mat-header-cell {
+  background-color: #f1f1f1;
+  border-bottom: 2px solid #9cdc47;
+  font-weight: bold;
+  color: #9cdc47;
+}
+
+td.mat-cell {
+  border-bottom: none;
+  ;
+}
+
+button.mat-icon-button {
+  margin: 0;
+  padding: 0;
+}
+
+mat-paginator.cadre {
+  margin-top: 20px;
+}
+
+.active-icon {
+  color: #9cdc47;
+}
+
+.inactive-icon {
+  color: red;
+}
+
+.cadre {
+  margin: 20px 0;
+}
+
+.mat-list-table {
+  overflow-x: auto;
+}
+
+.table-actions-button {
+  position: relative;
+}
+
 
 
 

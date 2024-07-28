@@ -8,16 +8,50 @@
 
     <nav id="navbar" class="navbar order-last order-lg-0">
       <ul>
-        <li><a class="nav-link scrollto " routerLink="/">User Management</a></li>
+        <li *ngIf="isAuthenticated" ><a class="nav-link scrollto " routerLink="/users">User Management</a></li>
 
-        <li><a class="nav-link scrollto active"routerLink="/home" >Home</a></li>
-        <li><a class="nav-link scrollto" href="#about">About</a></li>
-        <li><a class="nav-link scrollto" href="#services">Services</a></li>
-      </ul>
+        <li *ngIf="!isAuthenticated"><a class="nav-link scrollto active" routerLink="/" >Home</a></li>
+        <li *ngIf="!isAuthenticated"><a class="nav-link scrollto" href="#about">About</a></li>
+        <li *ngIf="!isAuthenticated"><a class="nav-link scrollto" href="#services">Services</a></li>
+        <li *ngIf="isAuthenticated"><a class="nav-link scrollto" >
+          <span mat-button [matMenuTriggerFor]="menu" *ngIf="isAuthenticated" >
+            <div style="display: flex;">  
+              <mat-icon>account_circle</mat-icon>
+            <span >{{fullname}}</span>
+            <mat-icon>arrow_drop_down</mat-icon>
+
+            </div>
+            
+        </span>
+          </a></li>
+        <mat-menu #menu="matMenu">
+        
+            <button mat-menu-item >
+              <mat-icon style="color: #9cdc47">person</mat-icon>
+              <span >Profile</span>
+            </button>
+  
+            <span mat-menu-item (click)="logout()">
+              <mat-icon style="color: #9cdc47">exit_to_app</mat-icon>
+              <span >Logout</span>
+            </span>
+          </mat-menu>
+    
+
+      </ul>  
       <i class="bi bi-list mobile-nav-toggle"></i>
     </nav>
+   
+  
+    
+    
+     
+     
+     
+    
+  
 
-   <button type="button" class="appointment-btn scrollto" (click)="navigateToLogin()" >Login</button>
+   <button *ngIf="!isAuthenticated" type="button" class="appointment-btn scrollto" (click)="navigateToLogin()" >Login</button>
   </div>
 </header>
 

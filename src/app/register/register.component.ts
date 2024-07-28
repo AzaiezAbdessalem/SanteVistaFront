@@ -5,6 +5,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Role } from '../class/role';
 import { User } from '../class/user';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-register',
@@ -49,7 +50,7 @@ submited:boolean=false
 role=new Role
   onSubmit() {
     this.submited=true
-    console.log(' Submitted', this.submited);
+    console.log(' Submitted', this.registerForm.value);
 
     if (this.registerForm.valid) {
       this.user.lastname=this.registerForm.value.lastname
@@ -58,6 +59,7 @@ role=new Role
       this.user.firstname=this.registerForm.value.firstname
       this.user.password=this.registerForm.value.password
       this.user.gender=this.registerForm.value.gender
+      console.log(' this.user', this.user);
 
       this.roles.find
       (
@@ -73,7 +75,15 @@ role=new Role
       this.authService.register(this.user).subscribe
       (data=>
       {
-      console.log(data)
+        Swal.fire({
+          text: 'Registration has been successfully done',
+          icon: 'success',
+          timer: 1500,
+          showConfirmButton: false
+      }).then(() => {
+    // Cette partie sera exécutée après avoir cliqué sur "OK" dans la fenêtre modale
+    this.navigateTosignin() 
+   });
       }
       )
      }
