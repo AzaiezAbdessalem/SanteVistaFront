@@ -1,0 +1,14 @@
+<div class="confirmation-dialog">
+    <i class="fas fa-times iconographie" (click)="closeDialog()"></i>
+    <div class="confirmation-content">
+        <p><i class="fas fa-trash-alt"></i> Voulez-vous vraiment supprimer {{ element }} ?</p>
+    </div>
+    <div class="confirmation-button">
+        <a class="btn bordered-button round uppercase float-right cancel-button" (click)="onNoClick()">
+           Annuler
+        </a>
+        <a class="button" (click)="onYesClick()">
+          Confirmer
+        </a>
+    </div>
+</div>

@@ -1,0 +1,153 @@
+.confirmation-dialog {
+    
+    width: Fill (400px)px;
+    height: Fill (500px)px;
+    padding: 0px 8px 16px 8px;
+    gap: 16px;
+    border-radius: 4px 0px 0px 0px;
+    border-style: solid;
+    border-width: 7px;
+    border-color: #42424214;
+    opacity: 0px;
+    background: #FFFFFF;
+    
+    }
+    
+    .confirmation-content {
+        margin-top: 20px; /* Add some space between content and buttons */
+    
+        margin-bottom: 20px; /* Add some space between content and buttons */
+    }
+    
+    .confirmation-content p {
+        margin: 0;
+        display: flex; /* Use flexbox */
+        align-items: left; /* Align icon and text vertically */
+       
+        font-family: Nunito;
+    font-size: 16px;
+    font-weight: 400px;
+    line-height: 20px;
+    letter-spacing: -1px;
+    text-align: left;
+    
+    
+    
+    
+    
+    }
+    
+    .confirmation-content img {
+        margin-left: 3%; /* Adjust spacing between icon and text */
+        margin-right: 3%; /* Adjust spacing between icon and text */
+        width: 90px;
+        height: 20px;
+        
+        
+    }
+    
+    .confirmation-button {
+        display: flex;
+        justify-content: center; /* Align buttons to the right */
+        width: Hug (96px)px;
+        height: Fixed (36px)px;
+        padding: 0px 16px 0px 16px;
+        gap: 0px;
+        border-radius: 4px 0px 0px 0px;
+        border: 1px 0px 0px 0px;
+        opacity: 0px;
+
+    
+    
+        
+    
+        
+    
+    
+    }
+    
+    .cancel-button {
+        width: Hug (96px)px;
+        height: Fixed (36px)px;
+        padding: 0px 16px 0px 16px;
+        gap: 0px;
+        border-radius: 4px 0px 0px 0px;
+        opacity: 0px;
+
+    
+    
+     color:#FD3535;
+        font-family: Nunito;
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 32px;
+        letter-spacing: 1px;
+        text-align: center;
+        
+    }
+    .button:hover {
+        background-color: #9cdc47; /* Change la couleur de fond au survol */
+        color: white; /* Change la couleur du texte au survol */
+        border-color: white; /* Change la couleur de la bordure au survol */
+      
+    
+    }
+    .cancel-button:hover {
+        background-color: red; /* Change la couleur de fond au survol */
+        color: white; /* Change la couleur du texte au survol */
+        border-color: white; /* Change la couleur de la bordure au survol */
+      
+    
+    }
+    
+    .confirmation-button a {
+        padding: 10px 20px;
+        font-family: Nunito;
+        font-size: 10px;
+        font-weight: 700;
+        line-height: 32px;
+        letter-spacing: 1px;
+        text-align: center;
+    }
+    
+    
+    img{
+        max-width: 5%;
+        margin-left: 95%;
+        width: 23px;
+        height: 23px;
+        gap: 0px;
+        opacity: 0px;
+        gap: 0px;
+        opacity: 0px;
+    
+    }
+    
+    
+    .confirmation-dialog {
+        /* Your existing styles */
+      }
+      
+      .iconographie {
+        cursor: pointer;
+        font-size: 24px;
+        color: #333;
+        float: right;
+      }
+      
+      .confirmation-content p {
+        display: flex;
+        align-items: center;
+        font-size: 18px;
+      }
+      
+      .confirmation-content i {
+        margin-right: 10px;
+        font-size: 24px;
+        color: #e74c3c;
+      }
+      
+      .confirmation-button .btn {
+        /* Your existing styles */
+      }
+      

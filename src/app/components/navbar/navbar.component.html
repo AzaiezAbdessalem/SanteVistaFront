@@ -9,7 +9,7 @@
     <nav id="navbar" class="navbar order-last order-lg-0">
       <ul>
         <li *ngIf="isAuthenticated" ><a class="nav-link scrollto " routerLink="/users">User Management</a></li>
-
+        <li *ngIf="isAuthenticated" ><a class="nav-link scrollto " routerLink="/activities">activities</a></li>
         <li *ngIf="!isAuthenticated"><a class="nav-link scrollto active" routerLink="/" >Home</a></li>
         <li *ngIf="!isAuthenticated"><a class="nav-link scrollto" href="#about">About</a></li>
         <li *ngIf="!isAuthenticated"><a class="nav-link scrollto" href="#services">Services</a></li>

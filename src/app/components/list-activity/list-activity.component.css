@@ -1,0 +1,14 @@
+.button{
+    gap: 8px;
+    border-color: #9cdc47;
+    display: inline-flex;
+    height: 36px;
+    align-items: center;
+    padding: 8px;
+    position: relative;
+    border-radius: 4px;
+    border: 1px solid;
+    box-shadow: var(--shadow-light);
+    color: #9cdc47;
+    background-color: white; /* Fond blanc pour le bouton */
+  }

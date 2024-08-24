@@ -1,0 +1,115 @@
+/* Styles de base pour le formulaire */
+form {
+    max-width: 500px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Styles pour les champs du formulaire */
+  form h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #9cdc47;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #9cdc47;
+  }
+  
+  input[type="text"],
+  input[type="number"] {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #9cdc47;
+    border-radius: 4px;
+    font-size: 16px;
+  }
+  
+  input[type="text"]:focus,
+  input[type="number"]:focus {
+    border-color: #007bff;
+    outline: none;
+  }
+  
+  /* Styles pour les messages d'erreur */
+  .is-invalid {
+    border-color: #dc3545;
+  }
+  
+  .is-invalid:focus {
+    border-color: #e02d2d;
+  }
+  
+  div.ng-invalid.ng-touched .is-invalid {
+    border-color: #dc3545;
+  }
+  
+  div.ng-invalid.ng-touched .is-invalid:focus {
+    border-color: #e02d2d;
+  }
+  
+  div[ngClass].form-container-error {
+    border: 1px solid #dc3545;
+    padding: 10px;
+    border-radius: 4px;
+    background-color: #ffe6e6;
+  }
+  
+  div.ng-invalid.ng-touched .form-container-error {
+    border-color: #e02d2d;
+  }
+  
+  div.ng-invalid.ng-touched .form-container-error:focus {
+    border-color: #e02d2d;
+  }
+  
+  /* Styles pour les messages d'erreur */
+  div *ngIf {
+    color: #dc3545;
+    font-size: 14px;
+    margin-top: -8px;
+    margin-bottom: 10px;
+  }
+  
+  /* Styles pour les boutons */
+  button {
+    width: calc(50% - 10px);
+    padding: 10px;
+    margin-top: 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  button[type="button"] {
+    background-color: #6c757d;
+    color: white;
+  }
+  
+  button[type="button"]:hover {
+    background-color: #5a6268;
+  }
+  
+  button[type="submit"] {
+    background-color: #9cdc47;
+    color: white;
+  }
+  
+  button[type="submit"]:hover {
+    background-color: #9cdc47;
+  }
+  
+  button[disabled] {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  

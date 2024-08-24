@@ -1,0 +1,41 @@
+<div  >
+    <form [formGroup]="activityForm" (ngSubmit)="saveActivity()">
+      <div  [ngClass]="{'form-container-error': activityForm.invalid && (activityForm.dirty || activityForm.touched)}">
+        <div >
+          <h2 >Activity</h2>
+          
+  
+        </div>
+        <div >
+          <div >
+            <label for="name">Name<span></span></label>
+            <input type="text" formControlName="name" placeholder="" id="name" [ngClass]="{'is-invalid': activityForm.get('name')?.invalid && submitted}">
+  
+            <div *ngIf="activityForm.get('name')?.invalid  && submitted">
+              <div style="color: red;" *ngIf="activityForm.get('name')?.errors?.['required']">renseignez votre nom</div>
+              <div style="color: red;" *ngIf="activityForm.get('name')?.errors?.['minLengthWithoutWhitespace']">minimum 2 caractéres</div>
+
+            </div>
+          </div>
+
+          <div >
+            <label for="duree">durée (cm) </label>
+  
+            
+            <input  type="number" formControlName="duree" placeholder="" id="duree" [ngClass]="{'is-invalid': activityForm.get('duree')?.invalid && submitted}">
+            <div *ngIf="activityForm.get('duree')?.invalid  && submitted">
+              <div style="color: red;" *ngIf="activityForm.get('duree')?.errors?.['required']">renseignez votre duree</div>
+              <div style="color: red;" *ngIf="activityForm.get('duree')?.errors?.['min']">min 1</div>
+              <div style="color: red;" *ngIf="activityForm.get('duree')?.errors?.['max']">max 60</div>
+            </div>
+          </div>
+        </div>
+        <div >
+          <button type="button"  (click)="closeDialog()">Annuler</button>
+          <button type="submit" [disabled]="activityForm.pristine && this.data.id">Enregistrer</button>
+  
+        </div>
+      </div>
+    </form>
+  </div>
+  

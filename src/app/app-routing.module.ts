@@ -12,6 +12,7 @@ import { ActiviteComponent } from './components/Profile_Components/activite/acti
 import { AnalyseComponent } from './components/Profile_Components/analyse/analyse.component';
 import { RendezVousComponent } from './components/Profile_Components/rendez-vous/rendez-vous.component';
 import { RegimeListComponent } from './components/regime-list/regime-list.component';
+import { ListActivityComponent } from './components/list-activity/list-activity.component';
 
 const routes: Routes = [
 
@@ -28,6 +29,8 @@ const routes: Routes = [
   {path:"analyse", component: AnalyseComponent},
   {path:"rendez-vous", component: RendezVousComponent},
   {path:"regimeList", component: RegimeListComponent},
+
+  {path:"activities", component: ListActivityComponent},
 
 ];
 

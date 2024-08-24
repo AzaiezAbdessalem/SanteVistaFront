@@ -36,6 +36,9 @@ import { RegimeListComponent } from './components/regime-list/regime-list.compon
 import { AddRegimeDialogComponent } from './components/add-regime-dialog/add-regime-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { ListActivityComponent } from './components/list-activity/list-activity.component';
+import { AddActivityComponent } from './components/add-activity/add-activity.component';
+import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +59,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     RendezVousComponent,
     SidebarComponent,
     RegimeListComponent,
-    AddRegimeDialogComponent
+    AddRegimeDialogComponent,
+    ListActivityComponent,
+    AddActivityComponent,
+    ConfirmationDialogComponent
   ],
   imports: [
     BrowserModule,
