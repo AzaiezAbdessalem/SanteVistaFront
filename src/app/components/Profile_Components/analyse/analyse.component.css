@@ -1,0 +1,114 @@
+/*--------------------------------------------------------------
+# analyseInfo
+--------------------------------------------------------------*/
+.analyseInfo {
+    display: flex;
+    margin-left: 200px;
+    margin-top: 150px;
+    text-align: center;
+    padding: 20px;
+    background-color: #f7f9fc;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .analyseInfo .section-title h2 {
+    font-size: 32px;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  .analyse-docs {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 20px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .doc-info {
+    max-width: 500px;
+    margin-right: 20px;
+  }
+  
+  .doc-info .info-box {
+    text-align: left;
+    border: 1px solid #d5e1ed;
+    padding: 20px;
+    transition: all ease-in-out 0.3s;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .doc-info .info-box .icon {
+    margin-right: 15px;
+    font-size: 24px;
+    color: #9cdc47;
+  }
+  
+  .doc-info .info-box .info-title {
+    font-weight: 700;
+    margin-bottom: 5px;
+    font-size: 24px;
+    color: #9cdc47;
+  }
+  
+  .doc-info .info-box .info-content {
+    line-height: 24px;
+    font-size: 14px;
+    color: #333;
+  }
+  
+  .doc-info .info-box:hover {
+    background: #9cdc47;
+    border-color: #9cdc47;
+  }
+  
+  .doc-info .info-box:hover .info-title,
+  .doc-info .info-box:hover .info-content,
+  .doc-info .info-box:hover .icon {
+    color: #fff;
+  }
+  
+  .upload-section {
+    max-width: 500px;
+    text-align: left;
+  }
+  
+  .upload-section h3 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 15px;
+  }
+  
+  .upload-section form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .upload-section input[type="file"] {
+    margin-bottom: 15px;
+  }
+  
+  .upload-section button {
+    background-color: #9cdc47;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .upload-section button:hover {
+    background-color: #8bc542;
+  }
+  

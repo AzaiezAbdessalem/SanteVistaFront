@@ -1,0 +1,22 @@
+<nav class="profile-navbar">
+    <ul>
+        <li [class.active]="isActive('profile')">
+            <a (click)="navigateTo('profile')">Mon Profile</a>
+        </li>
+        <li [class.active]="isActive('informations')">
+            <a (click)="navigateTo('informations')">Mes informations</a>
+        </li>
+        <li [class.active]="isActive('regime')">
+            <a (click)="navigateTo('regime')">Régime</a>
+        </li>
+        <li [class.active]="isActive('activites')">
+            <a (click)="navigateTo('activites')">Activités</a>
+        </li>
+        <li [class.active]="isActive('analyse')">
+            <a (click)="navigateTo('analyse')">Analyse</a>
+        </li>
+        <li [class.active]="isActive('rendez-vous')">
+            <a (click)="navigateTo('rendez-vous')">Rendez-vous</a>
+        </li>
+    </ul>
+</nav>

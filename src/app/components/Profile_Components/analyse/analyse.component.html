@@ -1,0 +1,35 @@
+<app-sidebar></app-sidebar>
+<section id="analyseInfo" class="analyseInfo">
+    <div class="container">
+      <div class="section-title flex mt-4">
+        <h2>Analyses Médicales</h2>
+      </div>
+      <div class="analyse-docs">
+        <div class="doc-info">
+          <div class="info-box">
+            <div class="icon"><i class="fas fa-file-medical"></i></div>
+            <div class="info-title">Analyse de Sang:</div>
+            <div class="info-content">Document PDF</div>
+          </div>
+          <div class="info-box">
+            <div class="icon"><i class="fas fa-file-medical"></i></div>
+            <div class="info-title">Analyse d'Urine:</div>
+            <div class="info-content">Document PDF</div>
+          </div>
+          <div class="info-box">
+            <div class="icon"><i class="fas fa-file-medical"></i></div>
+            <div class="info-title">Analyse de Glucose:</div>
+            <div class="info-content">Document PDF</div>
+          </div>
+        </div>
+        <div class="upload-section">
+          <h3>Ajouter un Document</h3>
+          <form (submit)="onSubmit()">
+            <input type="file" (change)="onFileSelected($event)" />
+            <button type="submit">Télécharger</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+  

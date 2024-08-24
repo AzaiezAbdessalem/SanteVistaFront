@@ -1,0 +1,77 @@
+/*--------------------------------------------------------------
+# profileInfo
+--------------------------------------------------------------*/
+.profileInfo {
+    text-align: center;
+    padding: 20px;
+    background-color: #f7f9fc;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    margin-left: 200px;
+    margin-top: 150px;
+  }
+  
+  .profileInfo .section-title h2 {
+    font-size: 32px;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  .profile-details {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 20px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .profile-image {
+    margin-right: 20px;
+  }
+  
+  .profile-image img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 3px solid #9cdc47;
+  }
+  
+  .profile-info {
+    max-width: 500px;
+  }
+  
+  .profile-info .info-box {
+    text-align: left;
+    border: 1px solid #d5e1ed;
+    padding: 20px;
+    transition: all ease-in-out 0.3s;
+    margin-bottom: 20px;
+  }
+  
+  .profile-info .info-box .info-title {
+    font-weight: 700;
+    margin-bottom: 15px;
+    font-size: 24px;
+    color: #9cdc47;
+  }
+  
+  .profile-info .info-box .info-content {
+    line-height: 24px;
+    font-size: 14px;
+    color: #333;
+  }
+  
+  .profile-info .info-box:hover {
+    background: #9cdc47;
+    border-color: #9cdc47;
+  }
+  
+  .profile-info .info-box:hover .info-title,
+  .profile-info .info-box:hover .info-content {
+    color: #fff;
+  }
+  

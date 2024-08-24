@@ -1,0 +1,48 @@
+/*--------------------------------------------------------------
+# addRegimeDialog
+--------------------------------------------------------------*/
+
+.addRegimeDialog {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background-color: #f7f9fc;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .mat-form-field {
+    width: 100%;
+    margin-bottom: 15px;
+  }
+  
+  .dialog-actions {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+  
+  button {
+    flex: 1;
+    margin: 0 5px;
+  }
+  
+  .cancel-button {
+    background-color: #f44336; /* Red color for cancel button */
+    color: white;
+  }
+  
+  .save-button {
+    background-color: #4caf50; /* Green color for save button */
+    color: white;
+  }
+  
+  button.mat-button {
+    min-width: 100px; /* Ensure both buttons have the same size */
+  }
+  
+  button.mat-button:hover {
+    background-color: #333333;
+  }
+  

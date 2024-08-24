@@ -1,0 +1,44 @@
+<div class="steppers flex mt-16">
+<mat-horizontal-stepper linear #stepper>
+    <mat-step [stepControl]="objectifFormGroup">
+      <form [formGroup]="objectifFormGroup">
+        <ng-template matStepLabel>Objectif</ng-template>
+        <mat-form-field>
+          <mat-label>Objectif</mat-label>
+          <mat-select formControlName="objectif">
+            <mat-option value="gain">Gain de poids</mat-option>
+            <mat-option value="perte">Perte de poids</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperNext>SUIVANT</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="infoFormGroup">
+      <form [formGroup]="infoFormGroup">
+        <ng-template matStepLabel>Ajouter des informations</ng-template>
+        <mat-form-field>
+          <mat-label>Taille (cm)</mat-label>
+          <input matInput formControlName="taille" type="number">
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Poids (kg)</mat-label>
+          <input matInput formControlName="poids" type="number">
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperPrevious>PRÉCÉDENT</button>
+          <button mat-button matStepperNext>SUIVANT</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Poids idéal</ng-template>
+      <p>Votre poids idéal est : {{ idealWeight }}</p>
+      <div>
+        <button mat-button matStepperPrevious>PRÉCÉDENT</button>
+        <button mat-button (click)="onSubmit()">TERMINER</button>
+      </div>
+    </mat-step>
+  </mat-horizontal-stepper>
+</div>

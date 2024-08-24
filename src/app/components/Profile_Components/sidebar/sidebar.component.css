@@ -1,0 +1,47 @@
+/*--------------------------------------------------------------
+# profile-navbar
+--------------------------------------------------------------*/
+.profile-navbar {
+    width: 100%;
+    height: 60px;
+    background-color: #fff;
+    border-bottom: 2px solid #d5e1ed;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    position: fixed;
+    top: 80px;
+    left: 200px;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    z-index: 1000;
+}
+
+.profile-navbar ul {
+    display: flex;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.profile-navbar ul li {
+    margin-right: 20px;
+}
+
+.profile-navbar ul li a {
+    color: #2c3e50;
+    text-decoration: none;
+    display: block;
+    font-size: 16px;
+    padding: 10px;
+    border-radius: 4px;
+}
+
+.profile-navbar ul li.active a,
+.profile-navbar ul li a:hover {
+    background-color: #9cdc47;
+    color: #fff;
+}
+
+.profile-navbar ul li.active a {
+    font-weight: bold;
+}

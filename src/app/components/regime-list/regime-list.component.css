@@ -1,0 +1,46 @@
+/*--------------------------------------------------------------
+# regimeList
+--------------------------------------------------------------*/
+
+.regimeList {
+    margin-left: 200px;
+    padding: 20px;
+    margin-top: 150px;
+    
+}
+
+.regimeList .section-title h2 {
+    font-size: 32px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.regime-table {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.regime-table .mat-elevation-z8 {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+.mat-header-cell {
+    font-weight: bold;
+    background-color: #f7f9fc;
+    color: #333;
+}
+
+.mat-row:hover {
+    background-color: #f1f1f1;
+}
+
+.mat-button {
+    background-color: #9cdc47;
+    color: white;
+    margin: 10px;
+}
+
+.mat-button:hover {
+    background-color: #8bc542;
+}

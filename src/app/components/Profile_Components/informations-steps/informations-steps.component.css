@@ -1,0 +1,71 @@
+/* Steppers Styles */
+.steppers {
+    padding: 20px;
+    background-color: #f4f4f4; /* Light background */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+    max-width: 800px;
+    margin-top: 160px; /* Added margin-top */
+  }
+  
+  .mat-horizontal-stepper-header-container {
+    background-color: #9cdc47; /* Stepper header background color */
+    border-radius: 8px 8px 0 0;
+  }
+  
+  .mat-horizontal-stepper-header {
+    color: #fff;
+  }
+  
+  .mat-stepper-label {
+    color: #fff !important; /* Force white color for step label */
+  }
+  
+  .mat-stepper-icon-selected,
+  .mat-stepper-icon {
+    background-color: #fff !important; /* Icon background */
+    color: #9cdc47 !important; /* Icon color */
+  }
+  
+  .mat-stepper-icon-selected {
+    border: 2px solid #9cdc47; /* Selected icon border */
+  }
+  
+  .mat-stepper-horizontal-line {
+    border-top-color: #9cdc47; /* Line between steps */
+  }
+  
+  .mat-form-field {
+    width: 100%;
+  }
+  
+  .mat-form-field .mat-input-element {
+    font-size: 16px;
+  }
+  
+  .mat-form-field-appearance-outline .mat-form-field-outline {
+    color: #9cdc47; /* Outline color */
+  }
+  
+  .mat-form-field-label {
+    color: #9cdc47; /* Label color */
+  }
+  
+  button.mat-button {
+    background-color: #9cdc47; /* Button background */
+    color: #fff; /* Button text color */
+    margin: 10px 5px;
+    border-radius: 4px;
+    text-transform: none;
+  }
+  
+  button.mat-button:hover {
+    background-color: #7fb03d; /* Darker shade on hover */
+  }
+  
+  button.mat-button:disabled {
+    background-color: #c8e6c9; /* Disabled button background */
+    color: #8bc34a; /* Disabled button text */
+  }
+  
