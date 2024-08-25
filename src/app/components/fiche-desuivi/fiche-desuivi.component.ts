@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import dayGridPlugin from '@fullcalendar/daygrid'; // Import dayGridPlugin
 import interactionPlugin from '@fullcalendar/interaction'; // Import interactionPlugin
+import { ActivatedRoute } from '@angular/router';
+import { Regime } from 'src/app/class/regime';
+import { RegimeService } from 'src/app/service/regime.service';
+import { UserService } from 'src/app/service/user.service';
+import { User } from 'src/app/class/user';
 
 @Component({
   selector: 'app-fiche-desuivi',
@@ -8,6 +13,12 @@ import interactionPlugin from '@fullcalendar/interaction'; // Import interaction
   styleUrls: ['./fiche-desuivi.component.css']
 })
 export class FicheDesuiviComponent implements OnInit {
+  userId: string | null = null;
+  User: User | null = null;
+  regimes: Regime[] = [];
+  selectedRegime: Regime | null = null;
+  selectedRegimeId: number | null = null;
+
 
   // Liste des événements
   events = [
@@ -27,12 +38,24 @@ export class FicheDesuiviComponent implements OnInit {
       end: '2024-08-20T10:00:00'
     }
   ];
+  constructor(private userService: UserService, private route: ActivatedRoute, private regimeService: RegimeService) {}
 
   calendarOptions: any;
 
   ngOnInit(): void {
-    // Filtrer les mois contenant des événements
-    const monthsWithEvents = this.getMonthsWithEvents(this.events);
+
+    this.userId = this.route.snapshot.paramMap.get('id');
+    console.log(this.userId);
+
+    if (this.userId) {
+      this.userService.getUserById(this.userId).subscribe((result: User) => {
+        this.User = result;
+        this.selectedRegimeId = result.idRegime;
+        this.updateSelectedRegime();
+        console.log(result);
+      });
+    }
+    this.getAllRegimes();    const monthsWithEvents = this.getMonthsWithEvents(this.events);
 
     this.calendarOptions = {
       initialView: 'dayGridMonth',
@@ -76,7 +99,43 @@ export class FicheDesuiviComponent implements OnInit {
     };
   }
   AddRendezVous()
-  {
+  {}
 
+
+
+  getAllRegimes(): void {
+    this.regimeService.getAllRegimes().subscribe((data: Regime[]) => {
+      this.regimes = data;
+      this.updateSelectedRegime();
+    });
+  }
+
+  updateSelectedRegime(): void {
+    if (this.selectedRegimeId) {
+      this.selectedRegime = this.regimes.find(r => r.id === this.selectedRegimeId) || null;
+    }
+  }
+
+  onSelectRegime(): void {
+    if (this.selectedRegimeId && this.User) {
+      this.User.idRegime = this.selectedRegimeId;
+      this.userService.updateUser(this.User).subscribe((updatedUser: any) => {
+        this.User = updatedUser;
+        this.updateSelectedRegime();
+        console.log('Regime updated:', updatedUser);
+      });
+    }
+  }
+
+  deleteRegime(): void {
+    if (this.User) {
+      this.User.idRegime = null;
+      this.userService.updateUser(this.User).subscribe((updatedUser: any) => {
+        this.User = updatedUser;
+        this.selectedRegime = null;
+        this.selectedRegimeId = null;
+        console.log('Regime removed:', updatedUser);
+      });
+    }
   }
 }
