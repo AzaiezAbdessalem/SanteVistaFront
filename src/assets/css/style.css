@@ -150,7 +150,10 @@ h6 {
 #header .logo a {
   color: #9cdc47;
 }
+mat-icon{
+  color: #9cdc47;
 
+}
 #header .logo img {
   max-height: 70px;
 }

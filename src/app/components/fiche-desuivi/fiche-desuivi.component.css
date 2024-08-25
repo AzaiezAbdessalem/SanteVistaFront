@@ -5,3 +5,11 @@
     margin-bottom: 20px;
 
 }
+
+.full-calendar {
+    /* Styles pour le conteneur du calendrier */
+    height: 60px; /* Hauteur fixe pour le calendrier */
+    width: 100%; /* Largeur maximale du conteneur */
+    border: 1px solid #ddd; /* Bordure autour du calendrier */
+    border-radius: 8px; /* Coins arrondis */
+  }

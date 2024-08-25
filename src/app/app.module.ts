@@ -41,6 +41,10 @@ import { AddActivityComponent } from './components/add-activity/add-activity.com
 import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
 import { PatientListComponent } from './components/patient-list/patient-list.component';
 import { FicheDesuiviComponent } from './components/fiche-desuivi/fiche-desuivi.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { FullCalendarModule } from '@fullcalendar/angular'; // Import FullCalendar module
+
 
 @NgModule({
   declarations: [
@@ -86,6 +90,9 @@ import { FicheDesuiviComponent } from './components/fiche-desuivi/fiche-desuivi.
     MatDialogModule,
     BrowserAnimationsModule,
     MatFormFieldModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    FullCalendarModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: () => localStorage.getItem('token'), // Fonction pour récupérer le token JWT du local storage
