@@ -10,8 +10,20 @@ export class SidebarComponent {
   constructor(private router: Router, private route: ActivatedRoute) {}
 
   navigateTo(path: string): void {
-    this.router.navigate([path]);
+    const userid=localStorage.getItem("userId")
+    if(path=="rendez-vous" && userid)
+      {
+          if(userid){
+            this.router.navigate([path],{ queryParams: { userid: userid } });
+
+          }
+      }
+      else{
+        this.router.navigate([path]);
+      }    
+
   }
+
 
   isActive(path: string): boolean {
     return this.router.url.includes(path);

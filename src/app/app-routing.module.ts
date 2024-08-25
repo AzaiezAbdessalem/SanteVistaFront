@@ -31,7 +31,7 @@ const routes: Routes = [
   {path:"analyse", component: AnalyseComponent},
   {path:"rendez-vous", component: RendezVousComponent},
   {path:"regimeList", component: RegimeListComponent},
-  {path:"suiviFile/:id", component: FicheDesuiviComponent},
+  {path:"suiviFile", component: FicheDesuiviComponent},
 
   {path:"activities", component: ListActivityComponent},
   {path:"patientList", component: PatientListComponent},

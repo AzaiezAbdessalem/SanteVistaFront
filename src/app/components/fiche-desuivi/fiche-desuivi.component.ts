@@ -1,3 +1,4 @@
+import { AppointmentServiceService } from './../../service/appointment-service.service';
 import { Component, OnInit } from '@angular/core';
 import dayGridPlugin from '@fullcalendar/daygrid'; // Import dayGridPlugin
 import interactionPlugin from '@fullcalendar/interaction'; // Import interactionPlugin
@@ -6,6 +7,9 @@ import { Regime } from 'src/app/class/regime';
 import { RegimeService } from 'src/app/service/regime.service';
 import { UserService } from 'src/app/service/user.service';
 import { User } from 'src/app/class/user';
+import { AppointmentDialogComponent } from 'src/app/components/appointment-dialog/appointment-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
+import { Appointment } from 'src/app/class/Appointment';
 
 @Component({
   selector: 'app-fiche-desuivi',
@@ -16,36 +20,48 @@ export class FicheDesuiviComponent implements OnInit {
   userId: string | null = null;
   User: User | null = null;
   regimes: Regime[] = [];
+  events : Appointment[]=[]
+
   selectedRegime: Regime | null = null;
   selectedRegimeId: number | null = null;
 
 
   // Liste des événements
-  events = [
-    {
-      title: 'Rendez-vous 1',
-      start: '2024-08-12T10:30:00',
-      end: '2024-08-12T11:00:00'
-    },
-    {
-      title: 'Rendez-vous 2',
-      start: '2024-09-15T14:00:00',
-      end: '2024-08-15T15:00:00'
-    },
-    {
-      title: 'Rendez-vous 3',
-      start: '2024-08-20T09:00:00',
-      end: '2024-08-20T10:00:00'
-    }
-  ];
-  constructor(private userService: UserService, private route: ActivatedRoute, private regimeService: RegimeService) {}
+  constructor(private userService: UserService,
+     private route: ActivatedRoute,
+     private dialog: MatDialog,
+     private appointmentServiceService:AppointmentServiceService ,
+      private regimeService: RegimeService) {}
 
   calendarOptions: any;
 
-  ngOnInit(): void {
+  formatEvents(data: any[]): any[] {
+    return data.map((appointment, index) => ({
+      title: `Rendez-vous ${index + 1}`, // index + 1 pour commencer à 1 au lieu de 0
+      start: `${appointment.date}T${appointment.horaireDebut}`,
+      end: `${appointment.date}T${appointment.horaireFin}`
+    }));
+  }
+  
 
-    this.userId = this.route.snapshot.paramMap.get('id');
-    console.log(this.userId);
+  ngOnInit(): void {
+    
+    this.route.queryParamMap.subscribe(params => {
+      this.userId = params.get('userid');
+      console.log('UserID reçu depuis les query parameters:', this.userId);
+    });
+  if(this.userId)
+  {
+    this.appointmentServiceService.getAllAppointmentsByUserId(this.userId).subscribe(data=>
+    {
+      this.events = this.formatEvents(data)
+      this.calendarOptions = {
+        ...this.calendarOptions, // Copie les options actuelles
+        events: [...this.events] // Met à jour la liste des événements
+      };
+    }
+    )
+  }
 
     if (this.userId) {
       this.userService.getUserById(this.userId).subscribe((result: User) => {
@@ -55,7 +71,12 @@ export class FicheDesuiviComponent implements OnInit {
         console.log(result);
       });
     }
-    this.getAllRegimes();    const monthsWithEvents = this.getMonthsWithEvents(this.events);
+
+
+
+
+    this.getAllRegimes();   
+     const monthsWithEvents = this.getMonthsWithEvents(this.events);
 
     this.calendarOptions = {
       initialView: 'dayGridMonth',
@@ -98,8 +119,56 @@ export class FicheDesuiviComponent implements OnInit {
       endDate: endMonth ? endMonth.toISOString().split('T')[0] : ''
     };
   }
-  AddRendezVous()
-  {}
+  AddRendezVous(): void {
+    const dialogRef = this.dialog.open(AppointmentDialogComponent, {
+      width: '400px',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        console.log(result)
+        const start = `${result.date}T${result.horaireDebut}:00`;
+        const end = `${result.date}T${result.horaireFin}:00`;
+    
+        this.events.push({
+          title: `Rendez-vous ${this.events.length + 1} `,
+          start: start,
+          end: end,
+          id: 0,
+          horaireDebut: {
+            hours: 0,
+            minutes: 0
+          },
+          horaireFin: {
+            hours: 0,
+            minutes: 0
+          },
+          userId: '',
+          date: result.date
+        });
+        console.log(this.events)
+        this.calendarOptions = {
+          ...this.calendarOptions, // Copie les options actuelles
+          events: [...this.events] // Met à jour la liste des événements
+        };
+        let appointment=new Appointment()
+        appointment.userId=this.userId|| ''
+        appointment.horaireDebut=result.horaireDebut
+        appointment.horaireFin=result.horaireFin
+        appointment.date=result.date
+          console.log(appointment)
+
+    if(this.userId)
+    {
+      this.appointmentServiceService.saveAppointment(appointment).subscribe(data=>
+
+        console.log(data)
+      )
+    }      
+
+  }})
+    
+  }
 
 
 
