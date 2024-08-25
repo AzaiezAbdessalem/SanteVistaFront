@@ -1,56 +1,51 @@
 <app-sidebar></app-sidebar>
 <section id="regimeInfo" class="regimeInfo">
-    <div class="container">
-      <div class="section-title flex mt-4">
-        <h2>Informations du Régime</h2>
-      </div>
-      <div class="regime-details">
-        <div class="regime-info">
-          <div class="info-box">
-            <div class="icon"><i class="fas fa-id-badge"></i></div>
-            <div class="info-title">Nom:</div>
-            <div class="info-content">Régime Standard</div>
+  <div class="container">
+    <div class="section-title flex mt-4">
+      <h2>Informations du Régime</h2>
+    </div>
+    <div class="regime-details">
+      <div class="regime-info">
+        <div class="info-box">
+          <div class="icon"><i class="fas fa-id-badge"></i></div>
+          <div class="info-title">Nom:</div>
+          <div class="info-content">{{ regime?.name }}</div>
+        </div>
+        <div class="info-box">
+          <div class="icon"><i class="fas fa-apple-alt"></i></div>
+          <div class="info-title">Fruits:</div>
+          <div class="info-content">{{ regime?.quantityFruit }} portions par jour</div>
+        </div>
+        <div class="info-box">
+          <div class="icon"><i class="fas fa-carrot"></i></div>
+          <div class="info-title">Légumes:</div>
+          <div class="info-content">{{ regime?.quantityVegetable }} portions par jour</div>
+        </div>
+        <div class="info-box">
+          <div class="icon"><i class="fas fa-drumstick-bite"></i></div>
+          <div class="info-title">Protéines:</div>
+          <div class="info-content">{{ regime?.quantityProtein }}g par jour</div>
+        </div>
+        <div class="info-box">
+          <div class="icon"><i class="fas fa-bread-slice"></i></div>
+          <div class="info-title">Céréales:</div>
+          <div class="info-content">{{ regime?.quantityCereal }}g par jour</div>
+        </div>
+        <div class="info-box">
+          <div class="icon"><i class="fas fa-ban"></i></div>
+          <div class="info-title">Choses Interdites:</div>
+          <div class="info-content">
+            <ul>
+              <li *ngFor="let item of regime?.forbidden?.split(',')">{{ item }}</li>
+            </ul>
           </div>
-          <div class="info-box">
-            <div class="icon"><i class="fas fa-apple-alt"></i></div>
-            <div class="info-title">Fruits:</div>
-            <div class="info-content">3 portions par jour</div>
-          </div>
-          <div class="info-box">
-            <div class="icon"><i class="fas fa-carrot"></i></div>
-            <div class="info-title">Légumes:</div>
-            <div class="info-content">5 portions par jour</div>
-          </div>
-          <div class="info-box">
-            <div class="icon"><i class="fas fa-drumstick-bite"></i></div>
-            <div class="info-title">Protéines:</div>
-            <div class="info-content">150g par jour</div>
-          </div>
-          <div class="info-box">
-            <div class="icon"><i class="fas fa-bread-slice"></i></div>
-            <div class="info-title">Céréales:</div>
-            <div class="info-content">200g par jour</div>
-          </div>
-          <div class="info-box">
-            <div class="icon"><i class="fas fa-ban"></i></div>
-            <div class="info-title">Choses Interdites:</div>
-            <div class="info-content">
-              <ul>
-                <li>Sodas</li>
-                <li>Aliments frits</li>
-                <li>Sucreries</li>
-                <li>Alcool</li>
-                <li>Fast-food</li>
-              </ul>
-            </div>
-          </div>
-          <div class="info-box">
-            <div class="icon"><i class="fas fa-plus-circle"></i></div>
-            <div class="info-title">Complément:</div>
-            <div class="info-content">Multivitamines, Oméga-3</div>
-          </div>
+        </div>
+        <div class="info-box">
+          <div class="icon"><i class="fas fa-plus-circle"></i></div>
+          <div class="info-title">Complément:</div>
+          <div class="info-content">{{ regime?.complement }}</div>
         </div>
       </div>
     </div>
-  </section>
-  
+  </div>
+</section>
