@@ -1,38 +1,22 @@
 <app-sidebar></app-sidebar>
-<section id="activiteInfo" class="activiteInfo">
-    <div class="container">
-      <div class="section-title">
-        <h2>Informations d'Activités Physiques</h2>
-      </div>
-      <div class="activite-details">
-        <div class="activite-info">
-          <div class="info-box">
-            <div class="icon"><i class="fas fa-running"></i></div>
-            <div class="info-title">Course à pied:</div>
-            <div class="info-content">30 minutes par jour</div>
-          </div>
-          <div class="info-box">
-            <div class="icon"><i class="fas fa-dumbbell"></i></div>
-            <div class="info-title">Musculation:</div>
-            <div class="info-content">45 minutes par séance</div>
-          </div>
-          <div class="info-box">
-            <div class="icon"><i class="fas fa-biking"></i></div>
-            <div class="info-title">Cyclisme:</div>
-            <div class="info-content">1 heure par jour</div>
-          </div>
-          <div class="info-box">
-            <div class="icon"><i class="fas fa-swimmer"></i></div>
-            <div class="info-title">Natation:</div>
-            <div class="info-content">30 minutes par jour</div>
-          </div>
-          <div class="info-box">
-            <div class="icon"><i class="fas fa-yoga"></i></div>
-            <div class="info-title">Yoga:</div>
-            <div class="info-content">1 heure par séance</div>
-          </div>
+<section id="regimeInfo" class="regimeInfo">
+  <div class="container">
+    <div class="section-title flex mt-4">
+      <h2>Informations d'acticité</h2>
+    </div>
+    <div class="regime-details">
+      <div class="regime-info">
+        <div class="info-box">
+          <div class="icon"><i class="fa-sharp-duotone fa-solid fa-medal"></i></div>
+          <div class="info-title">Nom:</div>
+          <div class="info-content">{{ activity?.name }}</div>
+        </div>
+        <div class="info-box">
+          <div class="icon"><i class="fa-solid fa-stopwatch-20"></i></div>
+          <div class="info-title">Durée:</div>
+          <div class="info-content">{{ activity?.duree }} minutes par jour</div>
         </div>
       </div>
     </div>
-  </section>
-  
+  </div>
+</section>
