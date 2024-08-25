@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { User } from '../class/user';
 
@@ -19,6 +19,15 @@ export class UserService {
     return this.httpClient.get<User[]>(`${this.apiUrl}/`)
       
   }
+    getAllUsersPatient(): Observable<User[]> {
+      return this.httpClient.get<User[]>(`${this.apiUrl}/`)
+        .pipe(
+          map(users => users.filter(user => 
+            user.roles.some((role: any) => role.name === 'Patient')
+          ))
+        );
+    }
+    
   saveUser(userData: any): Observable<any> {
     console.log('user Before save in bd',userData);
     return this.httpClient.post(`${this.apiUrl}/create`, userData);

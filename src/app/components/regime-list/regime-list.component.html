@@ -1,72 +1,86 @@
-<div class="regimeList">
-    
-    <div class="section-title">
-      <h2>Liste des Régimes</h2>
-    </div>
-    <button mat-fab color="primary" class="add-button" (click)="openAddRegimeDialog()">
+<div class="section">
+  <div class="container">
+    <div class="cadre">
+      <div class="search-box">
+        <!-- Search functionality and other features can be added here -->
+      </div>
+      <div class="section-title">
+        <h2>Liste des Régimes</h2>
+      </div>
+
+      <button mat-fab color="primary" class="add-button" (click)="openAddRegimeDialog()">
         <mat-icon>add</mat-icon>
       </button>
-    <div class="regime-table">
-      <table mat-table [dataSource]="regimes" class="mat-elevation-z8">
-        <!-- Name Column -->
-        <ng-container matColumnDef="name">
-          <th mat-header-cell *matHeaderCellDef> Nom </th>
-          <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-        </ng-container>
-  
-        <!-- Quantity Fruit Column -->
-        <ng-container matColumnDef="quantityFruit">
-          <th mat-header-cell *matHeaderCellDef> Quantité de Fruits </th>
-          <td mat-cell *matCellDef="let element"> {{element.quantityFruit}} </td>
-        </ng-container>
-  
-        <!-- Quantity Vegetable Column -->
-        <ng-container matColumnDef="quantityVegetable">
-          <th mat-header-cell *matHeaderCellDef> Quantité de Légumes </th>
-          <td mat-cell *matCellDef="let element"> {{element.quantityVegetable}} </td>
-        </ng-container>
-  
-        <!-- Quantity Protein Column -->
-        <ng-container matColumnDef="quantityProtein">
-          <th mat-header-cell *matHeaderCellDef> Quantité de Protéines </th>
-          <td mat-cell *matCellDef="let element"> {{element.quantityProtein}} </td>
-        </ng-container>
-  
-        <!-- Quantity Cereal Column -->
-        <ng-container matColumnDef="quantityCereal">
-          <th mat-header-cell *matHeaderCellDef> Quantité de Céréales </th>
-          <td mat-cell *matCellDef="let element"> {{element.quantityCereal}} </td>
-        </ng-container>
-  
-        <!-- Forbidden Column -->
-        <ng-container matColumnDef="forbidden">
-          <th mat-header-cell *matHeaderCellDef> Interdits </th>
-          <td mat-cell *matCellDef="let element"> {{element.forbidden}} </td>
-        </ng-container>
-  
-        <!-- Complement Column -->
-        <ng-container matColumnDef="complement">
-          <th mat-header-cell *matHeaderCellDef> Complément </th>
-          <td mat-cell *matCellDef="let element"> {{element.complement}} </td>
-        </ng-container>
-  
-        <!-- Actions Column -->
-        <ng-container matColumnDef="actions">
-          <th mat-header-cell *matHeaderCellDef> Actions </th>
-          <td mat-cell *matCellDef="let element">
-            <button mat-icon-button color="primary" (click)="openEditRegimeDialog(element)">
-              <mat-icon>edit</mat-icon>
-            </button>
-            <button mat-icon-button color="warn" (click)="openConfirmationDialogDelete(element)">
-              <mat-icon>delete</mat-icon>
-            </button>
-          </td>
-        </ng-container>
-  
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-      </table>
+
+      <div class="mat-list-table">
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+          <!-- Name Column -->
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef class="header-cell uppercase titre-gras"> Nom </th>
+            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+          </ng-container>
+
+          <!-- Quantity Fruit Column -->
+          <ng-container matColumnDef="quantityFruit">
+            <th mat-header-cell *matHeaderCellDef class="header-cell uppercase titre-gras"> Quantité de Fruits </th>
+            <td mat-cell *matCellDef="let element"> {{element.quantityFruit}} </td>
+          </ng-container>
+
+          <!-- Quantity Vegetable Column -->
+          <ng-container matColumnDef="quantityVegetable">
+            <th mat-header-cell *matHeaderCellDef class="header-cell uppercase titre-gras"> Quantité de Légumes </th>
+            <td mat-cell *matCellDef="let element"> {{element.quantityVegetable}} </td>
+          </ng-container>
+
+          <!-- Quantity Protein Column -->
+          <ng-container matColumnDef="quantityProtein">
+            <th mat-header-cell *matHeaderCellDef class="header-cell uppercase titre-gras"> Quantité de Protéines </th>
+            <td mat-cell *matCellDef="let element"> {{element.quantityProtein}} </td>
+          </ng-container>
+
+          <!-- Quantity Cereal Column -->
+          <ng-container matColumnDef="quantityCereal">
+            <th mat-header-cell *matHeaderCellDef class="header-cell uppercase titre-gras"> Quantité de Céréales </th>
+            <td mat-cell *matCellDef="let element"> {{element.quantityCereal}} </td>
+          </ng-container>
+
+          <!-- Forbidden Column -->
+          <ng-container matColumnDef="forbidden">
+            <th mat-header-cell *matHeaderCellDef class="header-cell uppercase titre-gras"> Interdits </th>
+            <td mat-cell *matCellDef="let element"> {{element.forbidden}} </td>
+          </ng-container>
+
+          <!-- Complement Column -->
+          <ng-container matColumnDef="complement">
+            <th mat-header-cell *matHeaderCellDef class="header-cell uppercase titre-gras"> Complément </th>
+            <td mat-cell *matCellDef="let element"> {{element.complement}} </td>
+          </ng-container>
+
+          <!-- Actions Column -->
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef> Actions </th>
+            <td mat-cell *matCellDef="let element">
+              <button mat-icon-button [matMenuTriggerFor]="menu">
+                <mat-icon>more_vert</mat-icon>
+              </button>
+          
+              <mat-menu #menu="matMenu">
+                <button mat-menu-item (click)="openEditRegimeDialog(element)">
+                  <span>Edit</span>
+                </button>
+                <button mat-menu-item (click)="openConfirmationDialogDelete(element)">
+                  <span>Delete</span>
+                </button>
+              </mat-menu>
+            </td>
+          </ng-container>
+          
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </div>
+
+      <mat-paginator [pageSizeOptions]="[10, 20, 50]" showFirstLastButtons></mat-paginator>
     </div>
-   
   </div>
-  
+</div>

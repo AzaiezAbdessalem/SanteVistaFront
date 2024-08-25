@@ -65,7 +65,7 @@ role=new Role
       this.roles.find
       (
         (data:Role)=> {
-          if(          data.id==this.registerForm.value.role )
+          if(data.id==this.registerForm.value.role )
 {          this.rolesSelected.push(data)
 }
         }

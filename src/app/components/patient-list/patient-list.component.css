@@ -1,0 +1,12 @@
+.regimeList {
+    margin-left: 200px;
+    padding: 20px;
+    margin-top: 150px;
+    
+}
+
+.regimeList .section-title h2 {
+    font-size: 32px;
+    margin-bottom: 20px;
+    color: #333;
+}

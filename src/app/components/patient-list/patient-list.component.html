@@ -1,0 +1,80 @@
+<div class="section">
+    <div class="container">
+      <div class="cadre">
+        <div class="search-box">
+          <!-- Recherche et autres fonctionnalités -->
+        </div>
+        <div class="section-title">
+            <h2>Liste des Patients</h2>
+          </div>
+
+        <div class="mat-list-table">
+          <table mat-table [dataSource]="dataSource">
+  
+            <!-- Colonne Nom de famille -->
+            <ng-container matColumnDef="lastname">
+              <th mat-header-cell *matHeaderCellDef class="header-cell uppercase titre-gras" > First Name
+              </th>
+              <td mat-cell *matCellDef="let element"> {{element.lastname}} </td>
+            </ng-container>
+  
+            <!-- Colonne Prénom -->
+            <ng-container matColumnDef="firstname">
+              <th mat-header-cell *matHeaderCellDef class="header-cell uppercase titre-gras"> Last Name
+              </th>
+              <td mat-cell *matCellDef="let element"> {{element.firstname}} </td>
+            </ng-container>
+  
+            <!-- Colonne Email -->
+            <ng-container matColumnDef="email">
+              <th mat-header-cell *matHeaderCellDef class="header-cell uppercase titre-gras"> Email </th>
+              <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+            </ng-container>
+  
+           
+            
+  
+            <!-- Colonne Rôle -->
+            <ng-container matColumnDef="role">
+              <th mat-header-cell *matHeaderCellDef class="header-cell uppercase titre-gras"> Role </th>
+              <td mat-cell *matCellDef="let element">
+                <p *ngFor="let role of element.roles" >{{ role.name }}<br></p>
+              </td>
+            </ng-container>
+  
+            <!-- Colonne Genre -->
+            <ng-container matColumnDef="gender">
+              <th mat-header-cell *matHeaderCellDef class="header-cell uppercase titre-gras"> Gender </th>
+              <td mat-cell *matCellDef="let element"> {{ element.gender }} </td>
+            </ng-container>
+  
+            <ng-container matColumnDef="actions">
+              <th mat-header-cell *matHeaderCellDef class="header-cell uppercase titre-gras"> Actions </th>
+              <td mat-cell *matCellDef="let element">
+                <button mat-icon-button [matMenuTriggerFor]="menu">
+                  <mat-icon>more_vert</mat-icon>
+                </button>
+            
+                <mat-menu #menu="matMenu">
+                  <button mat-menu-item (click)="navigateToSuiviFile(element.id)">
+                    <span>Fiche de suivie</span>
+                  </button>
+                </mat-menu>
+                <mat-menu #menu="matMenu">
+                 
+                </mat-menu>
+              </td>
+            </ng-container>
+  
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selection.toggle(row)">
+            </tr>
+          </table>
+        </div>
+      </div>
+     
+      
+      <mat-paginator [pageSizeOptions]="[10, 20, 50]" showFirstLastButtons ></mat-paginator>
+    </div>
+  </div>
+  

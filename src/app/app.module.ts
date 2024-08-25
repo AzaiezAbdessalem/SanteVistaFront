@@ -39,6 +39,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { ListActivityComponent } from './components/list-activity/list-activity.component';
 import { AddActivityComponent } from './components/add-activity/add-activity.component';
 import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
+import { PatientListComponent } from './components/patient-list/patient-list.component';
+import { FicheDesuiviComponent } from './components/fiche-desuivi/fiche-desuivi.component';
 
 @NgModule({
   declarations: [
@@ -62,7 +64,9 @@ import { ConfirmationDialogComponent } from './components/confirmation-dialog/co
     AddRegimeDialogComponent,
     ListActivityComponent,
     AddActivityComponent,
-    ConfirmationDialogComponent
+    ConfirmationDialogComponent,
+    PatientListComponent,
+    FicheDesuiviComponent
   ],
   imports: [
     BrowserModule,

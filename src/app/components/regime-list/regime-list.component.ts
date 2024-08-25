@@ -1,9 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { SelectionModel } from '@angular/cdk/collections';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
-import { AddRegimeDialogComponent } from '../add-regime-dialog/add-regime-dialog.component';
 import { RegimeService } from 'src/app/service/regime.service';
 import { Regime } from 'src/app/class/regime';
 import Swal from 'sweetalert2';
+import { AddRegimeDialogComponent } from '../add-regime-dialog/add-regime-dialog.component';
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 
 @Component({
@@ -13,15 +17,27 @@ import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation
 })
 export class RegimeListComponent implements OnInit {
   displayedColumns: string[] = ['name', 'quantityFruit', 'quantityVegetable', 'quantityProtein', 'quantityCereal', 'forbidden', 'complement', 'actions'];
-  regimes: Regime[] = [];
+  dataSource = new MatTableDataSource<Regime>([]);
+  selection = new SelectionModel<Regime>(true, []);
+
+  @ViewChild(MatPaginator)
+  paginator!: MatPaginator;
+  @ViewChild(MatSort)
+  sort!: MatSort;
 
   constructor(private dialog: MatDialog, private regimeService: RegimeService) {}
 
   ngOnInit(): void {
-    this.fetchRegimes();
+    this.getAllRegimes();
   }
 
- 
+  getAllRegimes(): void {
+    this.regimeService.getAllRegimes().subscribe((data: Regime[]) => {
+      this.dataSource.data = data;
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    });
+  }
 
   openAddRegimeDialog(): void {
     const dialogRef = this.dialog.open(AddRegimeDialogComponent, {
@@ -32,16 +48,15 @@ export class RegimeListComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.regimeService.createRegime(result).subscribe((newRegime: Regime) => {
-          this.regimes.push(newRegime);
+          this.dataSource.data.push(newRegime);
+          this.dataSource._updateChangeSubscription();
+          Swal.fire({
+            title: "Régime ajouté avec succès !",
+            icon: 'success',
+            timer: 1500,
+            showConfirmButton: false
+          });
         });
-       
-        Swal.fire({
-          title: "Régime a été ajoutée avec succès !",
-          icon: 'success',
-          timer: 1500,
-          showConfirmButton: false
-        });
-        this.fetchRegimes();
       }
     });
   }
@@ -54,50 +69,42 @@ export class RegimeListComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.regimeService.createRegime(result).subscribe((newRegime: Regime) => {
-          this.regimes.push(newRegime);
+        this.regimeService.createRegime(result).subscribe(() => {
+          const index = this.dataSource.data.findIndex(r => r.id === result.id);
+          this.dataSource.data[index] = result;
+          this.dataSource._updateChangeSubscription();
+          Swal.fire({
+            title: "Régime mis à jour avec succès !",
+            icon: 'success',
+            timer: 1500,
+            showConfirmButton: false
+          });
         });
       }
-    
-      Swal.fire({
-        title: "Régime a été mis à jour avec succès !",
-        icon: 'success',
-        timer: 1500,
-        showConfirmButton: false
-      });
-      this.fetchRegimes();
     });
   }
 
-  openConfirmationDialogDelete(element: any): void {
+  openConfirmationDialogDelete(element: Regime): void {
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
-      data: { name: element.name,  element:  " « "+element.name+" »"   }
+      data: { name: element.name, element: " « " + element.name + " »" }
     });
-  
+
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        // L'utilisateur a confirmé la suppression
         this.deleteRegime(element.id);
       }
     });
   }
+
   deleteRegime(id: number): void {
-    console.log(id)
-    this.regimeService.deleteRegime(id).subscribe((response) => {
-     console.log(response)
-    });
-   
-    Swal.fire({
-      title: "Régime a été supprimé à jour avec succès !",
-      icon: 'success',
-      timer: 1500,
-      showConfirmButton: false
-    });
-    this.fetchRegimes();
-  }
-  fetchRegimes(): void {
-    this.regimeService.getAllRegimes().subscribe((data: Regime[]) => {
-      this.regimes = data;
+    this.regimeService.deleteRegime(id).subscribe(() => {
+      this.dataSource.data = this.dataSource.data.filter(r => r.id !== id);
+      Swal.fire({
+        title: "Régime supprimé avec succès !",
+        icon: 'success',
+        timer: 1500,
+        showConfirmButton: false
+      });
     });
   }
 }

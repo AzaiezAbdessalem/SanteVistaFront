@@ -13,6 +13,8 @@ import { AnalyseComponent } from './components/Profile_Components/analyse/analys
 import { RendezVousComponent } from './components/Profile_Components/rendez-vous/rendez-vous.component';
 import { RegimeListComponent } from './components/regime-list/regime-list.component';
 import { ListActivityComponent } from './components/list-activity/list-activity.component';
+import { PatientListComponent } from './components/patient-list/patient-list.component';
+import { FicheDesuiviComponent } from './components/fiche-desuivi/fiche-desuivi.component';
 
 const routes: Routes = [
 
@@ -29,8 +31,10 @@ const routes: Routes = [
   {path:"analyse", component: AnalyseComponent},
   {path:"rendez-vous", component: RendezVousComponent},
   {path:"regimeList", component: RegimeListComponent},
+  {path:"suiviFile/:id", component: FicheDesuiviComponent},
 
   {path:"activities", component: ListActivityComponent},
+  {path:"patientList", component: PatientListComponent},
 
 ];
 

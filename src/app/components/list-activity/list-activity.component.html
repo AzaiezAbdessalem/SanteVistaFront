@@ -4,8 +4,13 @@
         <div class="search-box">
           <!-- Recherche et autres fonctionnalités -->
         </div>
-        <h6 class="uppercase titre-gras">activities</h6>
-        <button type="button" class="button" (click)="openAddActivity()">Add Activity</button>
+        <div class="section-title">
+          <h2>Liste des activités</h2>
+          </div>
+        <button mat-fab color="primary" class="add-button" (click)="openAddActivity()">
+          <mat-icon>add</mat-icon>
+        </button>
+  
         <div class="mat-list-table">
           <table mat-table [dataSource]="dataSource">
   

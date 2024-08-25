@@ -10,10 +10,11 @@
       <ul>
         <li *ngIf="isAuthenticated" ><a class="nav-link scrollto " routerLink="/users">User Management</a></li>
         <li *ngIf="isAuthenticated" ><a class="nav-link scrollto " routerLink="/activities">activities</a></li>
+        <li *ngIf="isAuthenticated" ><a class="nav-link scrollto " routerLink="/patientList">Liste des patients</a></li>
         <li *ngIf="!isAuthenticated"><a class="nav-link scrollto active" routerLink="/" >Home</a></li>
         <li *ngIf="!isAuthenticated"><a class="nav-link scrollto" href="#about">About</a></li>
         <li *ngIf="!isAuthenticated"><a class="nav-link scrollto" href="#services">Services</a></li>
-        <li *ngIf="isAuthenticated"><a class="nav-link scrollto" href="regimeList">Régimes</a></li>
+        <li *ngIf="isAuthenticated"><a class="nav-link scrollto" routerLink="/regimeList">Régimes</a></li>
         <!-- <li><a class="nav-link scrollt oactive">Régimes</a></li> -->
         <li *ngIf="isAuthenticated"><a class="nav-link scrollto" >
           <span mat-button [matMenuTriggerFor]="menu" *ngIf="isAuthenticated" >
