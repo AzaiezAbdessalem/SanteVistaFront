@@ -40,6 +40,13 @@
                   <small *ngIf="registerForm.get('lastname')?.hasError('minlength')">Last Name must be at least 2 characters long.</small>
                 </div>
               </div>
+              <div class="row px-3">
+                <label class="mb-1"><h6 class="mb-0 text-sm">Age</h6></label>
+                <input type="number" formControlName="age" placeholder="Enter your age">
+                <div *ngIf="submited &&  registerForm.get('age')?.invalid" class="text-danger">
+                  <small *ngIf="registerForm.get('age')?.hasError('required')">age is required.</small>
+                </div>
+              </div>
               
               <div class="row px-3">
                 <label class="mb-1"><h6 class="mb-0 text-sm">Email</h6></label>

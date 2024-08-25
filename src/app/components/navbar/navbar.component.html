@@ -13,6 +13,8 @@
         <li *ngIf="!isAuthenticated"><a class="nav-link scrollto active" routerLink="/" >Home</a></li>
         <li *ngIf="!isAuthenticated"><a class="nav-link scrollto" href="#about">About</a></li>
         <li *ngIf="!isAuthenticated"><a class="nav-link scrollto" href="#services">Services</a></li>
+        <li *ngIf="isAuthenticated"><a class="nav-link scrollto" href="regimeList">Régimes</a></li>
+        <!-- <li><a class="nav-link scrollt oactive">Régimes</a></li> -->
         <li *ngIf="isAuthenticated"><a class="nav-link scrollto" >
           <span mat-button [matMenuTriggerFor]="menu" *ngIf="isAuthenticated" >
             <div style="display: flex;">  
@@ -28,7 +30,7 @@
         
             <button mat-menu-item >
               <mat-icon style="color: #9cdc47">person</mat-icon>
-              <span >Profile</span>
+              <span routerLink="/profile">Profile</span>
             </button>
   
             <span mat-menu-item (click)="logout()">
@@ -36,7 +38,6 @@
               <span >Logout</span>
             </span>
           </mat-menu>
-          <li><a class="nav-link scrollt oactive"routerLink="/profile">Profile</a></li>
       </ul>
       <i class="bi bi-list mobile-nav-toggle"></i>
     </nav>

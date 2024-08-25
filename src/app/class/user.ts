@@ -8,7 +8,10 @@ export class User {
     username!:string;
     email!:string;
     gender!:string;
-
+    weight!: number ;
+    height!: number ;
+    age!: number ;
+    job!: String ;
     dateInscription: any; 
     enabled!:boolean;
     roles!:any;

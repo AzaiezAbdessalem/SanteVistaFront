@@ -8,13 +8,6 @@
       </button>
     <div class="regime-table">
       <table mat-table [dataSource]="regimes" class="mat-elevation-z8">
-  
-        <!-- ID Column -->
-        <ng-container matColumnDef="id">
-          <th mat-header-cell *matHeaderCellDef> ID </th>
-          <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-        </ng-container>
-  
         <!-- Name Column -->
         <ng-container matColumnDef="name">
           <th mat-header-cell *matHeaderCellDef> Nom </th>
@@ -64,7 +57,7 @@
             <button mat-icon-button color="primary" (click)="openEditRegimeDialog(element)">
               <mat-icon>edit</mat-icon>
             </button>
-            <button mat-icon-button color="warn" (click)="deleteRegime(element.id)">
+            <button mat-icon-button color="warn" (click)="openConfirmationDialogDelete(element)">
               <mat-icon>delete</mat-icon>
             </button>
           </td>

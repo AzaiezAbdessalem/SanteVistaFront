@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UserService } from 'src/app/service/user.service';
 
 @Component({
   selector: 'app-informations-steps',
@@ -10,8 +11,10 @@ export class InformationsStepsComponent implements OnInit {
   objectifFormGroup!: FormGroup;
   infoFormGroup!: FormGroup;
   idealWeight!: number;
+  userId:any;
+  User :any
 
-  constructor(private _formBuilder: FormBuilder) {}
+  constructor(private userService:UserService,private _formBuilder: FormBuilder) {}
 
   ngOnInit(): void {
     this.objectifFormGroup = this._formBuilder.group({
@@ -21,6 +24,12 @@ export class InformationsStepsComponent implements OnInit {
       taille: ['', Validators.required],
       poids: ['', Validators.required]
     });
+    this.userId=localStorage.getItem("userId");
+console.log(this.userId)
+this.userService.getUserById(this.userId).subscribe((result)=>{
+  this.User=result;
+  console.log(result)
+})
   }
 
   onSubmit(): void {
@@ -29,7 +38,13 @@ export class InformationsStepsComponent implements OnInit {
       taille: this.infoFormGroup.value.taille,
       poids: this.infoFormGroup.value.poids
     };
-
+      this.User.goal = formValues.objectif;
+      this.User.height = formValues.taille;
+      this.User.weight = formValues.poids;
+      this.userService.updateUser(this.User).subscribe((response) => {
+        console.log('User information updated successfully', response);
+      });
+console.log(this.User)
     this.calculateIdealWeight(formValues);
     console.log('Form values:', formValues);
   }

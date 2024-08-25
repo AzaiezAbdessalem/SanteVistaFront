@@ -1,22 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { AddRegimeDialogComponent } from '../add-regime-dialog/add-regime-dialog.component';
-
-export interface Regime {
-  id: number;
-  name: string;
-  quantityFruit: number;
-  quantityVegetable: number;
-  quantityProtein: number;
-  quantityCereal: number;
-  forbidden: string;
-  complement: string;
-}
-
-const REGIME_DATA: Regime[] = [
-  {id: 1, name: 'Regime A', quantityFruit: 2, quantityVegetable: 3, quantityProtein: 2, quantityCereal: 1, forbidden: 'Sugar', complement: 'Vitamin D'},
-  // Add more static data as needed
-];
+import { RegimeService } from 'src/app/service/regime.service';
+import { Regime } from 'src/app/class/regime';
+import Swal from 'sweetalert2';
+import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'app-regime-list',
@@ -24,43 +12,92 @@ const REGIME_DATA: Regime[] = [
   styleUrls: ['./regime-list.component.css']
 })
 export class RegimeListComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'name', 'quantityFruit', 'quantityVegetable', 'quantityProtein', 'quantityCereal', 'forbidden', 'complement', 'actions'];
-  regimes = REGIME_DATA;
+  displayedColumns: string[] = ['name', 'quantityFruit', 'quantityVegetable', 'quantityProtein', 'quantityCereal', 'forbidden', 'complement', 'actions'];
+  regimes: Regime[] = [];
 
-  constructor(public dialog: MatDialog) {}
+  constructor(private dialog: MatDialog, private regimeService: RegimeService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.fetchRegimes();
+  }
+
+ 
 
   openAddRegimeDialog(): void {
     const dialogRef = this.dialog.open(AddRegimeDialogComponent, {
-      width: '250px',
-      data: {id: null, name: '', quantityFruit: null, quantityVegetable: null, quantityProtein: null, quantityCereal: null, forbidden: '', complement: ''}
+      width: '450px',
+      data: { id: null, name: '', quantityFruit: null, quantityVegetable: null, quantityProtein: null, quantityCereal: null, forbidden: '', complement: '' }
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.regimes.push(result);
+        this.regimeService.createRegime(result).subscribe((newRegime: Regime) => {
+          this.regimes.push(newRegime);
+        });
+       
+        Swal.fire({
+          title: "Régime a été ajoutée avec succès !",
+          icon: 'success',
+          timer: 1500,
+          showConfirmButton: false
+        });
+        this.fetchRegimes();
       }
     });
   }
 
   openEditRegimeDialog(regime: Regime): void {
     const dialogRef = this.dialog.open(AddRegimeDialogComponent, {
-      width: '250px',
+      width: '450px',
       data: { ...regime }
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        const index = this.regimes.findIndex(r => r.id === result.id);
-        if (index !== -1) {
-          this.regimes[index] = result;
-        }
+        this.regimeService.createRegime(result).subscribe((newRegime: Regime) => {
+          this.regimes.push(newRegime);
+        });
       }
+    
+      Swal.fire({
+        title: "Régime a été mis à jour avec succès !",
+        icon: 'success',
+        timer: 1500,
+        showConfirmButton: false
+      });
+      this.fetchRegimes();
     });
   }
 
+  openConfirmationDialogDelete(element: any): void {
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      data: { name: element.name,  element:  " « "+element.name+" »"   }
+    });
+  
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        // L'utilisateur a confirmé la suppression
+        this.deleteRegime(element.id);
+      }
+    });
+  }
   deleteRegime(id: number): void {
-    this.regimes = this.regimes.filter(r => r.id !== id);
+    console.log(id)
+    this.regimeService.deleteRegime(id).subscribe((response) => {
+     console.log(response)
+    });
+   
+    Swal.fire({
+      title: "Régime a été supprimé à jour avec succès !",
+      icon: 'success',
+      timer: 1500,
+      showConfirmButton: false
+    });
+    this.fetchRegimes();
+  }
+  fetchRegimes(): void {
+    this.regimeService.getAllRegimes().subscribe((data: Regime[]) => {
+      this.regimes = data;
+    });
   }
 }
