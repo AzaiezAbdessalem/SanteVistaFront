@@ -43,7 +43,8 @@ import { PatientListComponent } from './components/patient-list/patient-list.com
 import { FicheDesuiviComponent } from './components/fiche-desuivi/fiche-desuivi.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
-import { FullCalendarModule } from '@fullcalendar/angular'; // Import FullCalendar module
+import { FullCalendarModule } from '@fullcalendar/angular';
+import { AppointmentDialogComponent } from './components/appointment-dialog/appointment-dialog.component'; // Import FullCalendar module
 
 
 @NgModule({
@@ -70,7 +71,8 @@ import { FullCalendarModule } from '@fullcalendar/angular'; // Import FullCalend
     AddActivityComponent,
     ConfirmationDialogComponent,
     PatientListComponent,
-    FicheDesuiviComponent
+    FicheDesuiviComponent,
+    AppointmentDialogComponent
   ],
   imports: [
     BrowserModule,

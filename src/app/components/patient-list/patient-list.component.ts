@@ -39,6 +39,11 @@ export class PatientListComponent  implements OnInit {
     });
   }
   navigateToSuiviFile(id: any): void {
-    this.router.navigate(['/suiviFile', id]);
+    if (id) {
+      this.router.navigate(['/suiviFile'], { queryParams: { userid: id } });
+    } else {
+      console.error('ID is undefined or null');
+    }
   }
+  
 }

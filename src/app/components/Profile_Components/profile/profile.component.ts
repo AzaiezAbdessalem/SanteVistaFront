@@ -14,6 +14,15 @@ export class ProfileComponent implements OnInit {
   }
 
   navigateTo(path: string): void {
-    this.router.navigate([path]);
+    const userid=localStorage.getItem("userId")
+    console.log(userid)
+    console.log(path)
+
+   if(path==="rendez-vous" && userid)
+   {
+
+    this.router.navigate([path],{ queryParams: { userid: userid } });
+   }
+   
   }
 }
