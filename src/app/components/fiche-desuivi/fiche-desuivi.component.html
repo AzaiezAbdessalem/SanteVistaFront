@@ -72,10 +72,49 @@
               
         </div>
 
+
+        
         <div class="cadre">
             <div class="section-title">
                 <h2>Activités</h2>
             </div>
+
+            <!-- Display activity details -->
+            <div class="regime-details">
+              <div class="regime-info" *ngIf="selectedActivity; else noActivity">
+                <div class="info-box">
+                  <div class="icon"><i class="fa-sharp-duotone fa-solid fa-medal"></i></div>
+                  <div class="info-title">Nom:</div>
+                  <div class="info-content">{{ selectedActivity.name }}</div>
+                </div>
+                <div class="info-box">
+                  <div class="icon"><i class="fa-solid fa-stopwatch-20"></i></div>
+                  <div class="info-title">Durée:</div>
+                  <div class="info-content">{{ selectedActivity.duree }} minutes par jour</div>
+                </div>
+
+
+
+
+                <button (click)="deleteActivity()" class="btn btn-danger">Supprimer Activité</button>
+              </div>
+              <ng-template #noActivity>
+                <p>Pas d'activité assigné. Merci de choisir un régime dans la liste suivante :</p>
+                <mat-form-field appearance="fill">
+                  <mat-label>Selectinner une activité</mat-label>
+                  <mat-select [(value)]="selectedActivityId" (selectionChange)="onSelectActivity()">
+                    <mat-option *ngFor="let activity of activities" [value]="activity.id">
+                      {{ activity.name }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+
+              </ng-template>
+            </div>
+
+
+
+
         </div>
         <div class="cadre">
             <div class="section-title">

@@ -16,6 +16,7 @@ export class User {
     enabled!:boolean;
     roles!:any;
     password!:any;
-  idRegime!: any;
+    idRegime!: any;
+    idActivity!:any;
 
 }

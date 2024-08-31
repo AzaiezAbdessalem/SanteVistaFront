@@ -7,9 +7,15 @@ import { Regime } from 'src/app/class/regime';
 import { RegimeService } from 'src/app/service/regime.service';
 import { UserService } from 'src/app/service/user.service';
 import { User } from 'src/app/class/user';
+
+import { Activity } from 'src/app/class/activity';
+import { ActivityServiceService } from 'src/app/service/activity.service';
+
+
 import { AppointmentDialogComponent } from 'src/app/components/appointment-dialog/appointment-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Appointment } from 'src/app/class/Appointment';
+
 
 @Component({
   selector: 'app-fiche-desuivi',
@@ -24,14 +30,13 @@ export class FicheDesuiviComponent implements OnInit {
 
   selectedRegime: Regime | null = null;
   selectedRegimeId: number | null = null;
+  activities: Activity[] = [];
+  selectedActivity: Activity | null = null;
+  selectedActivityId: number | null = null;
 
+  constructor(private userService: UserService, private route: ActivatedRoute, private regimeService: RegimeService,
+    private activityService:ActivityServiceService, private dialog: MatDialog,private appointmentServiceService:AppointmentServiceService) {}
 
-  // Liste des événements
-  constructor(private userService: UserService,
-     private route: ActivatedRoute,
-     private dialog: MatDialog,
-     private appointmentServiceService:AppointmentServiceService ,
-      private regimeService: RegimeService) {}
 
   calendarOptions: any;
 
@@ -67,16 +72,19 @@ export class FicheDesuiviComponent implements OnInit {
       this.userService.getUserById(this.userId).subscribe((result: User) => {
         this.User = result;
         this.selectedRegimeId = result.idRegime;
+
+        this.selectedActivityId = result.idActivity;
         this.updateSelectedRegime();
+
+        this.updateSelectedActivity();
         console.log(result);
       });
     }
 
-
-
-
-    this.getAllRegimes();   
+    this.getAllRegimes();
+    this.getAllActivities(); 
      const monthsWithEvents = this.getMonthsWithEvents(this.events);
+
 
     this.calendarOptions = {
       initialView: 'dayGridMonth',
@@ -181,9 +189,23 @@ export class FicheDesuiviComponent implements OnInit {
     });
   }
 
+  getAllActivities(): void {
+    this.activityService.getAllActivities().subscribe((data: Activity[]) => {
+      this.activities = data;
+      this.updateSelectedActivity();
+    });
+  }
+
   updateSelectedRegime(): void {
     if (this.selectedRegimeId) {
       this.selectedRegime = this.regimes.find(r => r.id === this.selectedRegimeId) || null;
+    }
+
+  }
+
+  updateSelectedActivity(): void {
+    if (this.selectedActivityId) {
+      this.selectedActivity = this.activities.find(a => a.id === this.selectedActivityId) || null;
     }
   }
 
@@ -198,6 +220,17 @@ export class FicheDesuiviComponent implements OnInit {
     }
   }
 
+  onSelectActivity(): void {
+    if (this.selectedActivityId && this.User) {
+      this.User.idActivity = this.selectedActivityId;
+      this.userService.updateUser(this.User).subscribe((updatedUser: any) => {
+        this.User = updatedUser;
+        this.updateSelectedActivity();
+        console.log('Activity updated:', updatedUser);
+      });
+    }
+  }
+
   deleteRegime(): void {
     if (this.User) {
       this.User.idRegime = null;
@@ -206,6 +239,17 @@ export class FicheDesuiviComponent implements OnInit {
         this.selectedRegime = null;
         this.selectedRegimeId = null;
         console.log('Regime removed:', updatedUser);
+      });
+    }
+  }
+  deleteActivity(): void {
+    if (this.User) {
+      this.User.idActivity = null;
+      this.userService.updateUser(this.User).subscribe((updatedUser: any) => {
+        this.User = updatedUser;
+        this.selectedActivity = null;
+        this.selectedActivityId = null;
+        console.log('Activity removed:', updatedUser);
       });
     }
   }
