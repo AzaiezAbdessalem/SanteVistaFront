@@ -18,9 +18,16 @@ export class AppointmentDialogComponent implements OnInit {
     private fb: FormBuilder,
      private userService :UserService
   ) {}
+  fullname:any
   ngOnInit(): void {
     this.userService.getUserById(localStorage.getItem('userId')||'').subscribe
-    (data=>console.log(data.firstname + data.lastname ))
+    (data=> 
+{    
+    console.log(data )
+    this.fullname=data.firstname + data.lastname
+}    
+    
+    )
     this.appointmentForm = this.fb.group({
       name: [''],
       date: ['', [Validators.required, this.futureDateValidator]],
