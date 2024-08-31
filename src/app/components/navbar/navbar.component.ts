@@ -11,7 +11,11 @@ export class NavbarComponent implements OnInit {
 
   constructor(private router: Router,private authService: AuthService,) { }
   isAuthenticated: boolean = false;
+  profile()
+  {
+    this.router.navigate(['/profile']);
 
+  }
   navigateToLogin() {
     this.router.navigate(['/login']);
   }
