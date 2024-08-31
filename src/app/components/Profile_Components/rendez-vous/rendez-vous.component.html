@@ -1,7 +1,11 @@
-<app-sidebar></app-sidebar><div class="cadre">
+<app-sidebar></app-sidebar>
+<div class="cadre">
   <div class="section-title">
     <h2>Rendez-vous</h2>
-    
+    <div style="right: auto;">
+      <button  class="appointment-btn" (click)="AddRendezVous()">Planifier un rendez-vous</button>
+
+  </div>
     <full-calendar [options]="calendarOptions"></full-calendar>
   </div>
 </div>

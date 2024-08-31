@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
-import { UserManagementComponent } from './user-management/user-management.component';
+import { UserManagementComponent } from './components/user-management/user-management.component';
 import { ProfileComponent } from './components/Profile_Components/profile/profile.component';
 import { InformationsStepsComponent } from './components/Profile_Components/informations-steps/informations-steps.component';
 import { InformationsComponent } from './components/Profile_Components/informations/informations.component';
@@ -15,6 +15,7 @@ import { RegimeListComponent } from './components/regime-list/regime-list.compon
 import { ListActivityComponent } from './components/list-activity/list-activity.component';
 import { PatientListComponent } from './components/patient-list/patient-list.component';
 import { FicheDesuiviComponent } from './components/fiche-desuivi/fiche-desuivi.component';
+import { RendezVousListComponent } from './components/rendez-vous-list/rendez-vous-list.component';
 
 const routes: Routes = [
 
@@ -32,7 +33,7 @@ const routes: Routes = [
   {path:"rendez-vous", component: RendezVousComponent},
   {path:"regimeList", component: RegimeListComponent},
   {path:"suiviFile", component: FicheDesuiviComponent},
-
+  {path:"ListRendez-Vous", component: RendezVousListComponent},
   {path:"activities", component: ListActivityComponent},
   {path:"patientList", component: PatientListComponent},
 

@@ -12,7 +12,7 @@ import { FaqComponent } from './components/faq/faq.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { JwtModule } from '@auth0/angular-jwt';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { UserManagementComponent } from './user-management/user-management.component';
+import { UserManagementComponent } from './components/user-management/user-management.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
@@ -44,7 +44,8 @@ import { FicheDesuiviComponent } from './components/fiche-desuivi/fiche-desuivi.
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { FullCalendarModule } from '@fullcalendar/angular';
-import { AppointmentDialogComponent } from './components/appointment-dialog/appointment-dialog.component'; // Import FullCalendar module
+import { AppointmentDialogComponent } from './components/appointment-dialog/appointment-dialog.component';
+import { RendezVousListComponent } from './components/rendez-vous-list/rendez-vous-list.component'; // Import FullCalendar module
 
 
 @NgModule({
@@ -72,7 +73,8 @@ import { AppointmentDialogComponent } from './components/appointment-dialog/appo
     ConfirmationDialogComponent,
     PatientListComponent,
     FicheDesuiviComponent,
-    AppointmentDialogComponent
+    AppointmentDialogComponent,
+    RendezVousListComponent
   ],
   imports: [
     BrowserModule,

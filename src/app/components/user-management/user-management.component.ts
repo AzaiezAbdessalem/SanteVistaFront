@@ -2,8 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { UserService } from './../service/user.service';
-import { User } from '../class/user';
+import { UserService } from '../../service/user.service';
+import { User } from '../../class/user';
 import { SelectionModel } from '@angular/cdk/collections';
 
 @Component({
@@ -22,7 +22,8 @@ export class UserManagementComponent implements OnInit {
   @ViewChild(MatSort)
   sort!: MatSort;
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, 
+  ) { }
 
   ngOnInit() {
     this.getAllUsers();
@@ -37,20 +38,11 @@ export class UserManagementComponent implements OnInit {
     });
   }
 
-  openEditUser(id: number) {
-    // Implémenter la fonction pour ouvrir l'éditeur d'utilisateur
-  }
 
-  openConfirmationDialog(user: any): void {
-    // Implémenter la fonction pour ouvrir la boîte de dialogue de confirmation
-  }
-
-  deleteUser(user: any) {
-    // Implémenter la fonction pour supprimer l'utilisateur
-  }
 
   toggleUserAccountEnabled(element: User) {
     this.userService.toggleUserAccountEnabled(element.id).subscribe(data => {
+
       this.getAllUsers();
     });
   }

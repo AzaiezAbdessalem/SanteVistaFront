@@ -158,7 +158,9 @@ export class FicheDesuiviComponent implements OnInit {
             minutes: 0
           },
           userId: '',
-          date: result.date
+          date: result.date,
+          accepted: true,
+          name: ''
         });
         console.log(this.events)
         this.calendarOptions = {
