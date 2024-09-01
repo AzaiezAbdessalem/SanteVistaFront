@@ -20,7 +20,8 @@ export class RendezVousComponent implements OnInit {
   User: User | null = null;
   regimes: Regime[] = [];
   events : Appointment[]=[]
-
+  rendezvousAcceptes: Appointment[] = [];
+  rendezvousNonAcceptes:Appointment[] = [];
   selectedRegime: Regime | null = null;
   selectedRegimeId: number | null = null;
 
@@ -44,15 +45,20 @@ export class RendezVousComponent implements OnInit {
   }
   accepted:boolean=false
 
-
+patient:boolean=false
   ngOnInit(): void {
     const roles = localStorage.getItem('roles');
     if (roles) {
       const parsedRoles = JSON.parse(roles);
       // Vérifier si "Patient" est dans les rôles
       if (!parsedRoles.includes('Patient')) {
+
         this.accepted=true
       }
+      else{
+        this.patient=true
+      }
+
       
     }
     console.log(this.accepted)
@@ -63,16 +69,8 @@ export class RendezVousComponent implements OnInit {
     });
   if(this.userId)
   {
-    this.appointmentServiceService.getAllAppointmentsByUserId(this.userId).subscribe(data=>
-    {
-      console.log(data)
-      this.events = this.formatEvents(data)
-      this.calendarOptions = {
-        ...this.calendarOptions, // Copie les options actuelles
-        events: [...this.events] // Met à jour la liste des événements
-      };
-    }
-    )
+    this.getAllAppointmentsByUserId(this.userId)
+
   }
 
  
@@ -96,11 +94,31 @@ export class RendezVousComponent implements OnInit {
       headerToolbar: {
         right: 'prev,next', // Boutons de navigation (précédent, suivant)
          left: 'title' // Rien à droite pour enlever le bouton Today
-      }
+      },
+
     };
   }
+  
+  getAllAppointmentsByUserId(userId:any)
+  {
 
-  // Méthode pour obtenir les mois contenant des événements
+    this.appointmentServiceService.getAllAppointmentsByUserId(userId).subscribe(data=>
+      {
+        this.rendezvousAcceptes = data.filter((rdv:Appointment) => rdv.accepted);
+        this.rendezvousNonAcceptes = data.filter((rdv:Appointment) => !rdv.accepted);
+        console.log(data)
+        console.log(data)
+  
+        this.events = this.formatEvents(this.rendezvousAcceptes)
+        this.calendarOptions = {
+          ...this.calendarOptions, // Copie les options actuelles
+          events: [...this.events] // Met à jour la liste des événements
+        };
+      }
+      )
+
+
+  }  // Méthode pour obtenir les mois contenant des événements
   getMonthsWithEvents(events: any[]): any {
     let startMonth=  new Date ()
     let endMonth=  new Date () 
@@ -123,9 +141,12 @@ export class RendezVousComponent implements OnInit {
       endDate: endMonth ? endMonth.toISOString().split('T')[0] : ''
     };
   }
+  fullname=localStorage.getItem('fullname')
+
   AddRendezVous(): void {
     const dialogRef = this.dialog.open(AppointmentDialogComponent, {
       width: '30%',
+      data: this.fullname
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -168,8 +189,7 @@ export class RendezVousComponent implements OnInit {
     if(this.userId)
     {
       this.appointmentServiceService.saveAppointment(appointment).subscribe(data=>
-
-        console.log(data)
+        this.getAllAppointmentsByUserId(this.userId)
       )
     }      
 

@@ -1,7 +1,7 @@
 import { UserService } from './../../service/user.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Appointment } from 'src/app/class/Appointment';
 
 @Component({
@@ -15,19 +15,13 @@ export class AppointmentDialogComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<AppointmentDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any ,
     private fb: FormBuilder,
-     private userService :UserService
   ) {}
-  fullname:any
+fullname:any
   ngOnInit(): void {
-    this.userService.getUserById(localStorage.getItem('userId')||'').subscribe
-    (data=> 
-{    
-    console.log(data )
-    this.fullname=data.firstname + data.lastname
-}    
-    
-    )
+    this.fullname=this.data
+    console.log(this.fullname)
     this.appointmentForm = this.fb.group({
       name: [''],
       date: ['', [Validators.required, this.futureDateValidator]],
