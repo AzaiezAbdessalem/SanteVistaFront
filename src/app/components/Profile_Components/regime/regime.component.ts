@@ -13,32 +13,42 @@ export class RegimeComponent implements OnInit {
   userId: string | null = null;
   User: User | undefined;
   regime: Regime | undefined;
-
-  constructor(private userService: UserService, private regimeService: RegimeService) {}
+  role:any;
+  constructor(private regimeService: RegimeService) {}
 
   ngOnInit(): void {
-    this.getUser();
-  }
+    this.role=this.getUserRole();
+    this.userId=this.getUserId();
+    console.log('role',this.role);
+    if(this.role="Patient"){
+        this.getRegimesByUserIdAndStatusTrue(this.userId||'');
+        console.log("this.getRegimesByUserIdAndStatusTrue",this.getRegimesByUserIdAndStatusTrue(this.userId||''))
 
-  getUser(): void {
-    this.userId = localStorage.getItem("userId");
-    if (this.userId) {
-      this.userService.getUserById(this.userId).subscribe((result: User) => {
-        this.User = result;
-        console.log(result);
-        this.getRegimeById(); // Call after setting User
-      });
     }
   }
-
-  getRegimeById(): void {
-    if (this.User && this.User.idRegime) {
-      this.regimeService.getRegimeById(this.User.idRegime).subscribe((result: Regime) => {
-        this.regime = result;
-        console.log(result);
-      });
-    } else {
-      console.error('User or User.idRegime is undefined');
+getUserId():string | null {
+  const userId = localStorage.getItem('userId');
+  return userId;
+}
+  getUserRole(): string | null {
+    const roles = localStorage.getItem('roles');
+    if (roles) {
+      const parsedRoles = JSON.parse(roles);
+      // Vérifier si "Patient" est dans les rôles
+      if (parsedRoles.includes('Patient')) {
+        return 'Patient';
+      }
     }
+    return null;
   }
+  getRegimesByUserIdAndStatusTrue(userId:string): void {
+    this.regimeService.getRegimesByUserIdAndStatus(userId,true).subscribe((data: Regime[]) => {
+      
+          console.log('regimesTrue',data)
+
+          this.regime = data[0];  
+
+    });
+  }
+  
 }

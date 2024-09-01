@@ -16,7 +16,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./list-activity.component.css']
 })
 export class ListActivityComponent implements OnInit {
-  displayedColumns: string[] = ['name', 'duree','actions'];
+  displayedColumns: string[] = ['name', 'duree','link','repetition','actions'];
   dataSource = new MatTableDataSource<Activity>([]);
   selection = new SelectionModel<Activity>(true, []);
 

@@ -17,6 +17,8 @@ export class AddActivityComponent implements OnInit {
   isEditMode = false;
   @Input() name: any;
   @Input() duree: any;
+  @Input() link: any;
+  @Input() repetition: any;
 
 
 
@@ -25,7 +27,9 @@ export class AddActivityComponent implements OnInit {
   { 
     this.activityForm = this.fb.group({
       name: ['', [this.minLengthWithoutWhitespace(2), Validators.pattern("^\\s*[a-zA-ZÀ-ÿ']+(\\s+[a-zA-ZÀ-ÿ']+)*\\s*$")]],
-      duree: ['', [Validators.required,Validators.pattern("^[0-9]+$"), Validators.min(1),Validators.max(60)]],
+      duree: ['', [Validators.pattern("^[0-9]+$"), Validators.min(1),Validators.max(60)]],
+      link:['',[Validators.required]],
+      repetition:['',[ Validators.min(1),Validators.max(50)]]
     });
 
   }

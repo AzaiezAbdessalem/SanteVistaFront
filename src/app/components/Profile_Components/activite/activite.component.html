@@ -4,7 +4,7 @@
     <div class="section-title flex mt-4">
       <h2>Informations d'activité</h2>
     </div>
-    <div class="regime-details">
+    <div class="regime-details"  *ngFor="let activity of activites">
       <div class="regime-info">
         <div class="info-box">
           <div class="icon"><i class="fa-sharp-duotone fa-solid fa-medal"></i></div>
@@ -15,6 +15,19 @@
           <div class="icon"><i class="fa-solid fa-stopwatch-20"></i></div>
           <div class="info-title">Durée:</div>
           <div class="info-content">{{ activity?.duree }} minutes par jour</div>
+        </div>
+        <div class="info-box">
+          <div class="icon"><i class="fa-solid fa-stopwatch-20"></i></div>
+          <div class="info-title">lien:</div>
+            <!-- Vérifie si le lien existe avant de l'afficher -->
+            <a *ngIf="activity?.link" [href]="activity.link" target="_blank" rel="noopener noreferrer">
+              {{ activity.link }}
+            </a>
+        </div>
+        <div class="info-box">
+          <div class="icon"><i class="fa-solid fa-stopwatch-20"></i></div>
+          <div class="info-title">Répétition:</div>
+          <div class="info-content">{{ activity?.repetition }} répétition par jour</div>
         </div>
       </div>
     </div>

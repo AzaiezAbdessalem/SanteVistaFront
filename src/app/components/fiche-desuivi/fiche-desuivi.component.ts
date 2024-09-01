@@ -238,8 +238,6 @@ export class FicheDesuiviComponent implements OnInit {
 
   onSelectRegime(): void {
     if (this.selectedRegimeId ) {
-
-
 this.selectedRegime = this.regimes.find(r => r.id === this.selectedRegimeId) || null;
 console.log('this.selectedRegime',this.selectedRegimeId)
 
@@ -250,7 +248,6 @@ this.regimeService.createRegime(this.selectedRegime).subscribe((addedRegime:any)
   console.log('selectedRegime',this.selectedRegime);
 console.log('addedRegime',addedRegime);
 this.selectedRegimeId=addedRegime.id
-
 this.getRegimesByUserIdAndStatusFalse(this.userId || '')
 });
 }

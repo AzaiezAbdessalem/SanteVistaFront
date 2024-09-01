@@ -37,5 +37,7 @@ export class ActivityServiceService {
   getActivityById(id: Number): Observable<Activity>{
     return this.httpClient.get<Activity>(`${this.apiUrl}/${id}`);
   }
-  
+  getActivitesByUserId(userId: string): Observable<any> {
+    return this.httpClient.get(`${this.apiUrl}/user/${userId}`);
+  }
 }

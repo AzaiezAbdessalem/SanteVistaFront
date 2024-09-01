@@ -3,30 +3,42 @@
       <div  [ngClass]="{'form-container-error': activityForm.invalid && (activityForm.dirty || activityForm.touched)}">
         <div >
           <h2 >Activity</h2>
-          
-  
         </div>
-        <div >
-          <div >
+
+
+        <div>
+          <div>
             <label for="name">Name<span></span></label>
             <input type="text" formControlName="name" placeholder="" id="name" [ngClass]="{'is-invalid': activityForm.get('name')?.invalid && submitted}">
-  
             <div *ngIf="activityForm.get('name')?.invalid  && submitted">
               <div style="color: red;" *ngIf="activityForm.get('name')?.errors?.['required']">renseignez votre nom</div>
               <div style="color: red;" *ngIf="activityForm.get('name')?.errors?.['minLengthWithoutWhitespace']">minimum 2 caractéres</div>
+            </div>
+          </div>
 
+          <div>
+            <label for="duree">durée (min) </label>
+            <input  type="number" formControlName="duree" placeholder="" id="duree" [ngClass]="{'is-invalid': activityForm.get('duree')?.invalid && submitted}">
+            <div *ngIf="activityForm.get('duree')?.invalid  && submitted">
+              <div style="color: red;" *ngIf="activityForm.get('duree')?.errors?.['min']">min 1</div>
+              <div style="color: red;" *ngIf="activityForm.get('duree')?.errors?.['max']">max 60</div>
             </div>
           </div>
 
           <div >
-            <label for="duree">durée (min) </label>
-  
-            
-            <input  type="number" formControlName="duree" placeholder="" id="duree" [ngClass]="{'is-invalid': activityForm.get('duree')?.invalid && submitted}">
-            <div *ngIf="activityForm.get('duree')?.invalid  && submitted">
-              <div style="color: red;" *ngIf="activityForm.get('duree')?.errors?.['required']">renseignez votre duree</div>
-              <div style="color: red;" *ngIf="activityForm.get('duree')?.errors?.['min']">min 1</div>
-              <div style="color: red;" *ngIf="activityForm.get('duree')?.errors?.['max']">max 60</div>
+            <label for="link">lien </label>
+            <input  type="text" formControlName="link" placeholder="" id="link" [ngClass]="{'is-invalid': activityForm.get('link')?.invalid && submitted}">
+            <div *ngIf="activityForm.get('link')?.invalid  && submitted">
+              <div style="color: red;" *ngIf="activityForm.get('link')?.errors?.['required']">renseignez votre lien</div>
+            </div>
+          </div>
+
+          <div >
+            <label for="repetition">répétition </label>
+            <input  type="number" formControlName="repetition" placeholder="" id="repetition" [ngClass]="{'is-invalid': activityForm.get('repetition')?.invalid && submitted}">
+            <div *ngIf="activityForm.get('repetition')?.invalid  && submitted">
+              <div style="color: red;" *ngIf="activityForm.get('repetition')?.errors?.['min']">min 1</div>
+              <div style="color: red;" *ngIf="activityForm.get('repetition')?.errors?.['max']">max 50</div>
             </div>
           </div>
         </div>
