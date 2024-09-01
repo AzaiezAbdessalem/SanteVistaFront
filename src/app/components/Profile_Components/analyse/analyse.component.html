@@ -6,22 +6,12 @@
       </div>
       <div class="analyse-docs">
         <div class="doc-info">
-          <div class="info-box">
+          <div *ngFor="let analyse of analyses" class="info-box">
             <div class="icon"><i class="fas fa-file-medical"></i></div>
-            <div class="info-title">Analyse de Sang:</div>
-            <div class="info-content">Document PDF</div>
-          </div>
-          <div class="info-box">
-            <div class="icon"><i class="fas fa-file-medical"></i></div>
-            <div class="info-title">Analyse d'Urine:</div>
-            <div class="info-content">Document PDF</div>
-          </div>
-          <div class="info-box">
-            <div class="icon"><i class="fas fa-file-medical"></i></div>
-            <div class="info-title">Analyse de Glucose:</div>
-            <div class="info-content">Document PDF</div>
+            <div class="info-title">{{ analyse.name }}:</div>
           </div>
         </div>
+        
         <div class="upload-section">
           <h3>Ajouter un Document</h3>
           <form (submit)="onSubmit()">

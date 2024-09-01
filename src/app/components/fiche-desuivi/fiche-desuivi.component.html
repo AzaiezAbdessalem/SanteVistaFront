@@ -176,6 +176,12 @@
         <div class="cadre">
             <div class="section-title">
                 <h2>Analyses</h2>
+                <div class="doc-info">
+                  <div *ngFor="let analyse of analyses" class="info-box">
+                    <div class="icon"><i class="fas fa-file-medical"></i></div>
+                    <div class="info-title">{{ analyse.name }}:</div>
+                  </div>
+                </div>
             </div>
         </div>
       </div>
