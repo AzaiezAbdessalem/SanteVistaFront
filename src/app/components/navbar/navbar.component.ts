@@ -11,6 +11,9 @@ export class NavbarComponent implements OnInit {
 
   constructor(private router: Router,private authService: AuthService,) { }
   isAuthenticated: boolean = false;
+  Patient:boolean=false
+  Nutritionist:boolean=false
+  Admin:boolean=false
   profile()
   {
     this.router.navigate(['/profile']);
@@ -28,6 +31,19 @@ fullname:any
       this.fullname=localStorage.getItem("fullname")
       this.isAuthenticated = authStatus;
     });
-  }
+    const roles = localStorage.getItem('roles');
+    if (roles) {
+      const parsedRoles = JSON.parse(roles);
+      // Vérifier si "Patient" est dans les rôles
+      if (parsedRoles.includes('Patient')) {
+        this.Patient=true;
+      }else if(parsedRoles.includes('Nutritionist')){
+        this.Nutritionist=true;
+      }
+      else{
+        this.Admin=true;
+      }
 
+  }
+  }
 }

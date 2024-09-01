@@ -25,7 +25,7 @@ export class ActivityServiceService {
     return this.httpClient.post(`${this.apiUrl}`, activityData);
   }
 
-  updateActivity(id:number,activityData: Activity): Observable<any> {
+  updateActivity(id:number,activityData: any): Observable<any> {
     const url = `${this.apiUrl}/` + id; 
     return this.httpClient.put(url, activityData);
   }

@@ -18,7 +18,7 @@ export class ActiviteComponent implements OnInit {
 
   ngOnInit(): void {
     //this.getUser();
-    this.getActivites();
+    this.getAllActivitesByUserId();
   }
   // getUser(): void {
   //   this.userId = localStorage.getItem("userId");
@@ -42,7 +42,7 @@ export class ActiviteComponent implements OnInit {
   //   }
   // }
 
-  getActivites(): void {
+  getAllActivitesByUserId(): void {
     this.userId = localStorage.getItem("userId");
     this.activityService.getActivitesByUserId(this.userId||'').subscribe(
       (data) => {

@@ -4,5 +4,5 @@ export class Activity {
     duree!:number;
     repetition!:number;
     link!:string;
-    userId!:string;
+    userIds!:string[];
 }
