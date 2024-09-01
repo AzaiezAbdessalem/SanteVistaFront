@@ -7,5 +7,7 @@ export class Regime {
     quantityCereal!: number;
     forbidden!: string;
     complement!: string;
+    userId!:string;
+    status!:boolean;
   }
   

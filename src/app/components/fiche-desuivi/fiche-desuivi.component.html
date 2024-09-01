@@ -13,8 +13,8 @@
             </div>
 
             <!-- Display regime details -->
-            <div class="regime-details">
-                <div class="regime-info" *ngIf="selectedRegime; else noRegime">
+            <div class="regime-details"  >
+                <div class="regime-info" *ngIf="selectedRegime&& selectedRegime.status; else noRegime">
                   <div class="info-box">
                     <div class="icon"><i class="fas fa-id-badge"></i></div>
                     <div class="info-title">Nom:</div>
@@ -54,7 +54,7 @@
                     <div class="info-title">Complément:</div>
                     <div class="info-content">{{ selectedRegime.complement }}</div>
                   </div>
-                  <button (click)="deleteRegime()" class="btn btn-danger">Supprimer Regime</button>
+                  <button (click)="toggleRegimeStatus(selectedRegime.id)" class="btn btn-danger">Supprimer Regime</button>
                 </div>
                 <ng-template #noRegime>
                   <p>Pas de régime assigné. Merci de choisir un régime dans la liste suivante :</p>
@@ -71,6 +71,63 @@
               </div>
               
         </div>
+
+
+        <div class="cadre">
+          <div class="section-title">
+              <h2>Historique du régime</h2>
+          </div>
+
+          <!-- Display regime details -->
+          <div class="regime-details" *ngFor="let selectedRegime of listRegime"  >
+              <div class="regime-info" >
+                <div class="info-box">
+                  <div class="icon"><i class="fas fa-id-badge"></i></div>
+                  <div class="info-title">Nom:</div>
+                  <div class="info-content">{{ selectedRegime.name }}</div>
+                </div>
+                <div class="info-box">
+                  <div class="icon"><i class="fas fa-apple-alt"></i></div>
+                  <div class="info-title">Fruits:</div>
+                  <div class="info-content">{{ selectedRegime.quantityFruit }} portions par jour</div>
+                </div>
+                <div class="info-box">
+                  <div class="icon"><i class="fas fa-carrot"></i></div>
+                  <div class="info-title">Légumes:</div>
+                  <div class="info-content">{{ selectedRegime.quantityVegetable }} portions par jour</div>
+                </div>
+                <div class="info-box">
+                  <div class="icon"><i class="fas fa-drumstick-bite"></i></div>
+                  <div class="info-title">Protéines:</div>
+                  <div class="info-content">{{ selectedRegime.quantityProtein }}g par jour</div>
+                </div>
+                <div class="info-box">
+                  <div class="icon"><i class="fas fa-bread-slice"></i></div>
+                  <div class="info-title">Céréales:</div>
+                  <div class="info-content">{{ selectedRegime.quantityCereal }}g par jour</div>
+                </div>
+                <div class="info-box">
+                  <div class="icon"><i class="fas fa-ban"></i></div>
+                  <div class="info-title">Choses Interdites:</div>
+                  <div class="info-content">
+                    <ul>
+                      <li *ngFor="let forbidden of selectedRegime.forbidden">{{ forbidden }}</li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="info-box">
+                  <div class="icon"><i class="fas fa-plus-circle"></i></div>
+                  <div class="info-title">Complément:</div>
+                  <div class="info-content">{{ selectedRegime.complement }}</div>
+                </div>
+
+              </div>
+              
+
+       
+            </div>
+            
+      </div>
 
 
         

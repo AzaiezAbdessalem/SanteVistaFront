@@ -34,4 +34,10 @@ export class RegimeService {
     console.log("hahahahahah"+id)
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
+  getRegimesByUserIdAndStatus(userId: string,status:boolean): Observable<Regime[]> {
+    return this.http.get<Regime[]>(`${this.apiUrl}/status/${userId}/${status}`);
+  }
+  toggleStatus(id: number): Observable<any> {
+    return this.http.put(`${this.apiUrl}/${id}/toggleStatus`, {});
+  }
 }

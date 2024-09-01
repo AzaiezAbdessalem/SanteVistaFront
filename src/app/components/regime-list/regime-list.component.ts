@@ -42,7 +42,7 @@ export class RegimeListComponent implements OnInit {
   openAddRegimeDialog(): void {
     const dialogRef = this.dialog.open(AddRegimeDialogComponent, {
       width: '450px',
-      data: { id: null, name: '', quantityFruit: null, quantityVegetable: null, quantityProtein: null, quantityCereal: null, forbidden: '', complement: '' }
+      data: { id: null, name: '', quantityFruit: null, quantityVegetable: null, quantityProtein: null, quantityCereal: null, forbidden: '', complement: '',userId:null }
     });
 
     dialogRef.afterClosed().subscribe(result => {

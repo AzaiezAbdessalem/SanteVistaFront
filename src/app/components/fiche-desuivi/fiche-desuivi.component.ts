@@ -33,6 +33,7 @@ export class FicheDesuiviComponent implements OnInit {
   activities: Activity[] = [];
   selectedActivity: Activity | null = null;
   selectedActivityId: number | null = null;
+  role:any;
 
   constructor(private userService: UserService, private route: ActivatedRoute, private regimeService: RegimeService,
     private activityService:ActivityServiceService, private dialog: MatDialog,private appointmentServiceService:AppointmentServiceService) {}
@@ -51,6 +52,9 @@ export class FicheDesuiviComponent implements OnInit {
 
   ngOnInit(): void {
     
+    // this.role=this.getUserRole();
+    // console.log('role',this.role);
+
     this.route.queryParamMap.subscribe(params => {
       this.userId = params.get('userid');
       console.log('UserID reçu depuis les query parameters:', this.userId);
@@ -63,21 +67,23 @@ export class FicheDesuiviComponent implements OnInit {
     this.getAllAppointmentsByUserId(this.userId)
    
   }
+    this.getRegimesByUserIdAndStatusFalse(this.userId||'')
+    this.getRegimesByUserIdAndStatusTrue(this.userId||'');
+    console.log('userrrrrrrrr',this.userId||'')
 
-    if (this.userId) {
-      this.userService.getUserById(this.userId).subscribe((result: User) => {
-        this.User = result;
-        this.selectedRegimeId = result.idRegime;
-
-        this.selectedActivityId = result.idActivity;
-        this.updateSelectedRegime();
-
-        this.updateSelectedActivity();
-        console.log(result);
-      });
-    }
+    console.log("this.getRegimesByUserIdAndStatusTrue",this.getRegimesByUserIdAndStatusTrue(this.userId||''))
 
     this.getAllRegimes();
+    // if(this.role="Patient"){
+    //     this.getRegimesByUserIdAndStatusTrue(this.userId||'');
+    //     console.log("this.getRegimesByUserIdAndStatusTrue",this.getRegimesByUserIdAndStatusTrue(this.userId||''))
+
+    //     this.getAllRegimes();
+    // }else{
+    //     this.getAllRegimes();
+    // }
+
+
     this.getAllActivities(); 
      const monthsWithEvents = this.getMonthsWithEvents(this.events);
 
@@ -214,6 +220,26 @@ export class FicheDesuiviComponent implements OnInit {
       this.updateSelectedRegime();
     });
   }
+   listRegime:Regime[]=[]
+  getRegimesByUserIdAndStatusFalse(userId:string): void {
+    
+    this.regimeService.getRegimesByUserIdAndStatus(userId,false).subscribe((data: Regime[]) => {
+      
+      this.listRegime = data;
+          console.log('listRegimeFalse',data)
+ 
+
+    });
+  }
+  getRegimesByUserIdAndStatusTrue(userId:string): void {
+    this.regimeService.getRegimesByUserIdAndStatus(userId,true).subscribe((data: Regime[]) => {
+      
+          console.log('regimesTrue',data)
+          this.selectedRegimeId=data[0].id
+          this.selectedRegime = data[0];  
+
+    });
+  }
 
   getAllActivities(): void {
     this.activityService.getAllActivities().subscribe((data: Activity[]) => {
@@ -224,6 +250,7 @@ export class FicheDesuiviComponent implements OnInit {
 
   updateSelectedRegime(): void {
     if (this.selectedRegimeId) {
+      console.log(this.selectedRegime,this.selectedRegimeId)
       this.selectedRegime = this.regimes.find(r => r.id === this.selectedRegimeId) || null;
     }
 
@@ -236,15 +263,25 @@ export class FicheDesuiviComponent implements OnInit {
   }
 
   onSelectRegime(): void {
-    if (this.selectedRegimeId && this.User) {
-      this.User.idRegime = this.selectedRegimeId;
-      this.userService.updateUser(this.User).subscribe((updatedUser: any) => {
-        this.User = updatedUser;
+    if (this.selectedRegimeId ) {
+this.selectedRegime = this.regimes.find(r => r.id === this.selectedRegimeId) || null;
+console.log('this.selectedRegime',this.selectedRegimeId)
+
+if(this.selectedRegime){
+  this.selectedRegime.userId =this.userId || '';
+  this.selectedRegime.status=true
+this.regimeService.createRegime(this.selectedRegime).subscribe((addedRegime:any)=>{
+  console.log('selectedRegime',this.selectedRegime);
+console.log('addedRegime',addedRegime);
+this.selectedRegimeId=addedRegime.id
+this.getRegimesByUserIdAndStatusFalse(this.userId || '')
+});
+}
+
         this.updateSelectedRegime();
-        console.log('Regime updated:', updatedUser);
-      });
-    }
+
   }
+}
 
   onSelectActivity(): void {
     if (this.selectedActivityId && this.User) {
@@ -257,17 +294,7 @@ export class FicheDesuiviComponent implements OnInit {
     }
   }
 
-  deleteRegime(): void {
-    if (this.User) {
-      this.User.idRegime = null;
-      this.userService.updateUser(this.User).subscribe((updatedUser: any) => {
-        this.User = updatedUser;
-        this.selectedRegime = null;
-        this.selectedRegimeId = null;
-        console.log('Regime removed:', updatedUser);
-      });
-    }
-  }
+
   deleteActivity(): void {
     if (this.User) {
       this.User.idActivity = null;
@@ -278,5 +305,29 @@ export class FicheDesuiviComponent implements OnInit {
         console.log('Activity removed:', updatedUser);
       });
     }
+  }
+  toggleRegimeStatus(regimeId: number): void {
+    this.regimeService.toggleStatus(regimeId).subscribe(
+      (response) => {
+        this.selectedRegime=null
+        this.selectedRegimeId=null
+        console.log('Status toggled:', response);
+        this.getRegimesByUserIdAndStatusFalse(this.userId||'')
+      },
+      (error) => {
+        console.error('Error toggling status:', error);
+      }
+    );
+  }
+  getUserRole(): string | null {
+    const roles = localStorage.getItem('roles');
+    if (roles) {
+      const parsedRoles = JSON.parse(roles);
+      // Vérifier si "Patient" est dans les rôles
+      if (parsedRoles.includes('Patient')) {
+        return 'Patient';
+      }
+    }
+    return null;
   }
 }
