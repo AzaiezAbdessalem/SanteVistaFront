@@ -15,6 +15,7 @@ import { ActivityServiceService } from 'src/app/service/activity.service';
 import { AppointmentDialogComponent } from 'src/app/components/appointment-dialog/appointment-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Appointment } from 'src/app/class/Appointment';
+import { Analyse } from 'src/app/class/analyse';
 
 
 @Component({
@@ -50,7 +51,19 @@ export class FicheDesuiviComponent implements OnInit {
     }));
   }
    fullname:any
-
+   analyses :Analyse[]=[]
+   getAllAnalysesByUserId(userId:string)
+   {
+     if( this.userId)
+       {
+     this.regimeService.getAllAnalyses(userId).subscribe(data=>
+       {      
+        this.analyses=data
+        console.log(this.analyses)
+       }
+      )}
+   }
+  
   ngOnInit(): void {
     
     // this.role=this.getUserRole();
@@ -68,6 +81,11 @@ export class FicheDesuiviComponent implements OnInit {
     this.getAllAppointmentsByUserId(this.userId)
    
   }
+  if( this.userId)
+    {
+      this.getAllAnalysesByUserId(this.userId)
+    
+    }
     this.getRegimesByUserIdAndStatusFalse(this.userId||'')
     this.getRegimesByUserIdAndStatusTrue(this.userId||'');
     console.log('userrrrrrrrr',this.userId||'')
@@ -135,7 +153,7 @@ export class FicheDesuiviComponent implements OnInit {
     };
   }
   )}
-  // Méthode pour obtenir les mois contenant des événements
+  // Méthode pour obtenir les mois contenant des événementsfoni
   getMonthsWithEvents(events: any[]): any {
     let startMonth=  new Date ()
     let endMonth=  new Date () 

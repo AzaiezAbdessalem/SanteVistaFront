@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Regime } from '../class/regime';
 import { environment } from 'src/environments/environment';
+import { Analyse } from '../class/analyse';
 
 @Injectable({
   providedIn: 'root'
@@ -10,9 +11,25 @@ import { environment } from 'src/environments/environment';
 export class RegimeService {
   private urlBack=environment.urlBack;
   private apiUrl = this.urlBack+'/SanteVista/regime';
+  private apiUrlAnalyse = this.urlBack+'/SanteVista/analyse';
 
  
   constructor(private http: HttpClient) {}
+  createAnalyse(analyse: Analyse, selectedFile: File): Observable<Analyse> {
+    const formData: FormData = new FormData();
+    formData.append('file', selectedFile);
+  
+    // Ajouter les propriétés de l'objet `analyse` individuellement dans le formData
+    formData.append('analyse', new Blob([JSON.stringify(analyse)], {
+      type: 'application/json'
+    }));
+  
+    return this.http.post<Analyse>(this.apiUrlAnalyse, formData);
+  }
+  
+  getAllAnalyses(userId:string): Observable<Analyse[]> {
+    return this.http.get<Analyse[]>(`${this.apiUrlAnalyse}/${userId}`);
+  }
 
   getAllRegimes(): Observable<Regime[]> {
     return this.http.get<Regime[]>(this.apiUrl);
