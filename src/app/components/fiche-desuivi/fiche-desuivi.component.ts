@@ -238,23 +238,20 @@ export class FicheDesuiviComponent implements OnInit {
 
   onSelectRegime(): void {
     if (this.selectedRegimeId ) {
-this.selectedRegime = this.regimes.find(r => r.id === this.selectedRegimeId) || null;
-console.log('this.selectedRegime',this.selectedRegimeId)
-
-if(this.selectedRegime){
-  this.selectedRegime.userId =this.userId || '';
-  this.selectedRegime.status=true
-this.regimeService.createRegime(this.selectedRegime).subscribe((addedRegime:any)=>{
-  console.log('selectedRegime',this.selectedRegime);
-console.log('addedRegime',addedRegime);
-this.selectedRegimeId=addedRegime.id
-this.getRegimesByUserIdAndStatusFalse(this.userId || '')
-});
-}
-
-        this.updateSelectedRegime();
-
-  }
+        this.selectedRegime = this.regimes.find(r => r.id === this.selectedRegimeId) || null;
+        console.log('this.selectedRegime',this.selectedRegimeId)
+              if(this.selectedRegime){
+                this.selectedRegime.userId =this.userId || '';
+                this.selectedRegime.status=true
+                this.regimeService.createRegime(this.selectedRegime).subscribe((addedRegime:any)=>{
+                console.log('selectedRegime',this.selectedRegime);
+              console.log('addedRegime',addedRegime);
+              this.selectedRegimeId=addedRegime.id
+              this.getRegimesByUserIdAndStatusFalse(this.userId || '')
+              });
+              }
+                    this.updateSelectedRegime();
+                                }
 }
 
   onSelectActivity(): void {
