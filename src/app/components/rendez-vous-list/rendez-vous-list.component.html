@@ -11,53 +11,47 @@
           <table mat-table [dataSource]="dataSource">
   
             <!-- Colonne Nom de famille -->
-            <ng-container matColumnDef="lastname">
-              <th mat-header-cell *matHeaderCellDef class="header-cell uppercase titre-gras" > First Name
+            <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef class="header-cell uppercase titre-gras" > Patient Name
               </th>
-              <td mat-cell *matCellDef="let element"> {{element.lastname}} </td>
+              <td mat-cell *matCellDef="let element"> {{element.name}} </td>
             </ng-container>
   
-            <!-- Colonne Prénom -->
-            <ng-container matColumnDef="firstname">
-              <th mat-header-cell *matHeaderCellDef class="header-cell uppercase titre-gras"> Last Name
-              </th>
-              <td mat-cell *matCellDef="let element"> {{element.firstname}} </td>
-            </ng-container>
-  
+        
             <!-- Colonne Email -->
-            <ng-container matColumnDef="email">
-              <th mat-header-cell *matHeaderCellDef class="header-cell uppercase titre-gras"> Email </th>
-              <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+            <ng-container matColumnDef="date">
+              <th mat-header-cell *matHeaderCellDef class="header-cell uppercase titre-gras"> Date </th>
+              <td mat-cell *matCellDef="let element"> {{element.date}} </td>
             </ng-container>
   
             <!-- Colonne Activation -->
-            <ng-container matColumnDef="enabled">
-              <th mat-header-cell *matHeaderCellDef class="header-cell uppercase titre-gras"> Account Status </th>
+          
+  
+            <!-- Colonne Rôle -->
+            <ng-container matColumnDef="horaireDebut">
+              <th mat-header-cell *matHeaderCellDef class="header-cell uppercase titre-gras"> date de debut </th>
               <td mat-cell *matCellDef="let element">
-                <span mat-icon-button (click)="toggleUserAccountEnabled(element)">
-                  <mat-icon [ngStyle]="{ 'font-size': '50px', 'width': '50px', 'height': '50px' }" [ngClass]="{ 'active-icon': element.enabled, 'inactive-icon': !element.enabled }">
-                    {{ element.enabled ? 'toggle_on' : 'toggle_off' }}
+                {{ element.horaireDebut }}
+              </td>
+            </ng-container>
+  
+            <!-- Colonne Genre -->
+            <ng-container matColumnDef="horaireFin">
+              <th mat-header-cell *matHeaderCellDef class="header-cell uppercase titre-gras"> date de debut </th>
+              <td mat-cell *matCellDef="let element"> {{ element.horaireFin }} </td>
+            </ng-container>
+  
+            <ng-container matColumnDef="accepted">
+              <th mat-header-cell *matHeaderCellDef class="header-cell uppercase titre-gras"> Rendez-vous Status </th>
+              <td mat-cell *matCellDef="let element">
+                <span mat-icon-button (click)="Accepted(element)">
+                  <mat-icon [ngStyle]="{ 'font-size': '50px', 'width': '50px', 'height': '50px' }" [ngClass]="{ 'active-icon': element.accepted, 'inactive-icon': !element.accepted }">
+                    {{ element.accepted ? 'toggle_on' : 'toggle_off' }}
                   </mat-icon>
                 </span>
               </td>
             </ng-container>
             
-  
-            <!-- Colonne Rôle -->
-            <ng-container matColumnDef="role">
-              <th mat-header-cell *matHeaderCellDef class="header-cell uppercase titre-gras"> Role </th>
-              <td mat-cell *matCellDef="let element">
-                <p *ngFor="let role of element.roles" >{{ role.name }}<br></p>
-              </td>
-            </ng-container>
-  
-            <!-- Colonne Genre -->
-            <ng-container matColumnDef="gender">
-              <th mat-header-cell *matHeaderCellDef class="header-cell uppercase titre-gras"> Gender </th>
-              <td mat-cell *matCellDef="let element"> {{ element.gender }} </td>
-            </ng-container>
-  
-      
   
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selection.toggle(row)">

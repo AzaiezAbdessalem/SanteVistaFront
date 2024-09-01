@@ -43,12 +43,12 @@ export class FicheDesuiviComponent implements OnInit {
 
   formatEvents(data: any[]): any[] {
     return data.map((appointment, index) => ({
-      title: `Rendez-vous ${index + 1}`, // index + 1 pour commencer à 1 au lieu de 0
+      title: `Rendez-vous ${appointment.name}`, // index + 1 pour commencer à 1 au lieu de 0
       start: `${appointment.date}T${appointment.horaireDebut}`,
       end: `${appointment.date}T${appointment.horaireFin}`
     }));
   }
-  
+   fullname:any
 
   ngOnInit(): void {
     
@@ -61,15 +61,11 @@ export class FicheDesuiviComponent implements OnInit {
     });
   if(this.userId)
   {
-    this.appointmentServiceService.getAllAppointmentsByUserId(this.userId).subscribe(data=>
-    {
-      this.events = this.formatEvents(data)
-      this.calendarOptions = {
-        ...this.calendarOptions, // Copie les options actuelles
-        events: [...this.events] // Met à jour la liste des événements
-      };
-    }
+    this.userService.getUserById(this.userId).subscribe(data=>
+      this.fullname= data.lastname +' '+ data.firstname 
     )
+    this.getAllAppointmentsByUserId(this.userId)
+   
   }
     this.getRegimesByUserIdAndStatusFalse(this.userId||'')
     this.getRegimesByUserIdAndStatusTrue(this.userId||'');
@@ -106,10 +102,38 @@ export class FicheDesuiviComponent implements OnInit {
       headerToolbar: {
         right: 'prev,next', // Boutons de navigation (précédent, suivant)
          left: 'title' // Rien à droite pour enlever le bouton Today
-      }
+      },      eventClick: this.handleEventClick.bind(this) // Ajout du gestionnaire de clics
+
     };
   }
+  alertVisible: boolean = false;
+  alertTitle: string = '';
+  alertMessage: string = '';
 
+  handleEventClick(info: any): void {
+    const event = info.event;
+    const eventDetails = {
+      title: event.title,
+      start: event.startStr,
+      end: event.endStr
+    };
+    this.alertTitle = 'Détails du rendez-vous';
+    this.alertMessage = `Titre: ${eventDetails.title}<br>Date de début: ${eventDetails.start}<br>Date de fin: ${eventDetails.end}`;
+    this.alertVisible = true;
+  }closeAlert(): void {
+    this.alertVisible = false;
+  }
+  getAllAppointmentsByUserId(userId:any)
+  {
+  this.appointmentServiceService.getAllAppointmentsByUserId(userId).subscribe(data=>
+  {
+    this.events = this.formatEvents(data.filter((rdv:Appointment) => rdv.accepted))
+    this.calendarOptions = {
+      ...this.calendarOptions, // Copie les options actuelles
+      events: [...this.events] // Met à jour la liste des événements
+    };
+  }
+  )}
   // Méthode pour obtenir les mois contenant des événements
   getMonthsWithEvents(events: any[]): any {
     let startMonth=  new Date ()
@@ -136,6 +160,7 @@ export class FicheDesuiviComponent implements OnInit {
   AddRendezVous(): void {
     const dialogRef = this.dialog.open(AppointmentDialogComponent, {
       width: '400px',
+      data: this.fullname
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -145,7 +170,7 @@ export class FicheDesuiviComponent implements OnInit {
         const end = `${result.date}T${result.horaireFin}:00`;
     
         this.events.push({
-          title: `Rendez-vous ${this.events.length + 1} `,
+          title: `Rendez-vous ${result.name} `,
           start: start,
           end: end,
           id: 0,
@@ -164,14 +189,15 @@ export class FicheDesuiviComponent implements OnInit {
         });
         console.log(this.events)
         this.calendarOptions = {
-          ...this.calendarOptions, // Copie les options actuelles
-          events: [...this.events] // Met à jour la liste des événements
+          ...this.calendarOptions, 
+          events: [...this.events] 
         };
         let appointment=new Appointment()
         appointment.userId=this.userId|| ''
         appointment.horaireDebut=result.horaireDebut
         appointment.horaireFin=result.horaireFin
         appointment.date=result.date
+        appointment.name=this.fullname
           console.log(appointment)
 
     if(this.userId)

@@ -186,8 +186,17 @@
                 <button  class="appointment-btn" (click)="AddRendezVous()">Ajouter un rendez-vous</button>
 
             </div>
-          <full-calendar [options]="calendarOptions"></full-calendar>
-        </div>
+            <div style="margin: 0 auto; margin-left: 30%;">
+              <full-calendar style="width: 70%;height: 20%;" [options]="calendarOptions"></full-calendar>
+
+            </div>
+          </div>
       </div>
     </div>
-  
+    <div class="custom-alert" *ngIf="alertVisible">
+      <div class="alert-content">
+        <h2>{{ alertTitle }}</h2>
+        <p [innerHTML]="alertMessage"></p>
+        <button (click)="closeAlert()">Fermer</button>
+      </div>
+    </div>

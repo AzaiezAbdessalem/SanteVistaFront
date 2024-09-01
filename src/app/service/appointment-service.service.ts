@@ -18,7 +18,13 @@ export class AppointmentServiceService {
     return this.httpClient.get<Appointment[]>(`${this.apiUrl}/allAppointments/${userId}`)
       
   }
-
+  getAllAppointments(): Observable<Appointment[]> {
+    return this.httpClient.get<Appointment[]>(`${this.apiUrl}`)
+      
+  }
+  AcceptedRendezVous(id: number): Observable<Appointment> {
+    return this.httpClient.post<Appointment>(`${this.apiUrl}/${id}`, null);
+  }
   saveAppointment(appointment: Appointment): Observable<Appointment> {
     console.log('activity Before save in bd',appointment);
     return this.httpClient.post<Appointment>(`${this.apiUrl}`, appointment);
