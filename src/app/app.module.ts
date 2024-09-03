@@ -45,7 +45,8 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { AppointmentDialogComponent } from './components/appointment-dialog/appointment-dialog.component';
-import { RendezVousListComponent } from './components/rendez-vous-list/rendez-vous-list.component'; // Import FullCalendar module
+import { RendezVousListComponent } from './components/rendez-vous-list/rendez-vous-list.component';
+import { EmailVerificationComponent } from './components/email-verification/email-verification.component'; // Import FullCalendar module
 
 
 @NgModule({
@@ -74,7 +75,8 @@ import { RendezVousListComponent } from './components/rendez-vous-list/rendez-vo
     PatientListComponent,
     FicheDesuiviComponent,
     AppointmentDialogComponent,
-    RendezVousListComponent
+    RendezVousListComponent,
+    EmailVerificationComponent
   ],
   imports: [
     BrowserModule,

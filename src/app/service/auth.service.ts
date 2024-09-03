@@ -5,7 +5,6 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { BehaviorSubject, Observable, Subject, catchError, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { User } from '../class/user';
-import { Role } from '../class/role';
 
 
 

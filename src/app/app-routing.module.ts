@@ -16,6 +16,7 @@ import { ListActivityComponent } from './components/list-activity/list-activity.
 import { PatientListComponent } from './components/patient-list/patient-list.component';
 import { FicheDesuiviComponent } from './components/fiche-desuivi/fiche-desuivi.component';
 import { RendezVousListComponent } from './components/rendez-vous-list/rendez-vous-list.component';
+import { EmailVerificationComponent } from './components/email-verification/email-verification.component';
 
 const routes: Routes = [
 
@@ -23,7 +24,7 @@ const routes: Routes = [
   {path:"login", component: LoginComponent},
   {path:"register", component: RegisterComponent},
   {path:"users", component: UserManagementComponent},
-
+  {path:"verifMailofAccount", component: EmailVerificationComponent},
   {path:"profile", component: ProfileComponent},
   {path:"steps", component: InformationsStepsComponent},
   {path:"informations", component: InformationsComponent},

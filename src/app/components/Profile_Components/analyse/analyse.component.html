@@ -8,7 +8,12 @@
         <div class="doc-info">
           <div *ngFor="let analyse of analyses" class="info-box">
             <div class="icon"><i class="fas fa-file-medical"></i></div>
-            <div class="info-title">{{ analyse.name }}:</div>
+            <div class="info-title">{{ analyse.name }}</div>
+          </div>
+          <div *ngIf="!analyses" class="info-box">
+            
+            <div class="info-title">pas des analyses</div>
+
           </div>
         </div>
         
