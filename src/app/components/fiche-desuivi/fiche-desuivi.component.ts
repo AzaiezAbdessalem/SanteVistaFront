@@ -25,6 +25,7 @@ import { Analyse } from 'src/app/class/analyse';
 })
 export class FicheDesuiviComponent implements OnInit {
   userId: string | null = null;
+  userIds:string[]=[]
   User: User | null = null;
   regimes: Regime[] = [];
   events : Appointment[]=[]
@@ -88,10 +89,10 @@ export class FicheDesuiviComponent implements OnInit {
     this.getRegimesByUserIdAndStatusFalse(this.userId||'')
     this.getRegimesByUserIdAndStatusTrue(this.userId||'');
     console.log('userrrrrrrrr',this.userId||'')
-
     console.log("this.getRegimesByUserIdAndStatusTrue",this.getRegimesByUserIdAndStatusTrue(this.userId||''))
-
     this.getAllRegimes();
+
+    this.getAllActivitesByUserId(this.userId||'');
     // if(this.role="Patient"){
     //     this.getRegimesByUserIdAndStatusTrue(this.userId||'');
     //     console.log("this.getRegimesByUserIdAndStatusTrue",this.getRegimesByUserIdAndStatusTrue(this.userId||''))
@@ -262,7 +263,7 @@ export class FicheDesuiviComponent implements OnInit {
   getAllActivities(): void {
     this.activityService.getAllActivities().subscribe((data: Activity[]) => {
       this.activities = data;
-      this.updateSelectedActivity();
+      console.log('this.activities',this.activities)
     });
   }
 
@@ -282,45 +283,59 @@ export class FicheDesuiviComponent implements OnInit {
 
   onSelectRegime(): void {
     if (this.selectedRegimeId ) {
-this.selectedRegime = this.regimes.find(r => r.id === this.selectedRegimeId) || null;
-console.log('this.selectedRegime',this.selectedRegimeId)
-
-if(this.selectedRegime){
-  this.selectedRegime.userId =this.userId || '';
-  this.selectedRegime.status=true
-this.regimeService.createRegime(this.selectedRegime).subscribe((addedRegime:any)=>{
-  console.log('selectedRegime',this.selectedRegime);
-console.log('addedRegime',addedRegime);
-this.selectedRegimeId=addedRegime.id
-this.getRegimesByUserIdAndStatusFalse(this.userId || '')
-});
-}
-
-        this.updateSelectedRegime();
-
-  }
+        this.selectedRegime = this.regimes.find(r => r.id === this.selectedRegimeId) || null;
+        console.log('this.selectedRegimeId',this.selectedRegimeId)
+              if(this.selectedRegime){
+                this.selectedRegime.userId =this.userId || '';
+                this.selectedRegime.status=true
+                this.regimeService.createRegime(this.selectedRegime).subscribe((addedRegime:any)=>{
+                console.log('selectedRegime',this.selectedRegime);
+              console.log('addedRegime',addedRegime);
+              this.selectedRegimeId=addedRegime.id
+              this.getRegimesByUserIdAndStatusFalse(this.userId || '')
+              });
+              }
+                    this.updateSelectedRegime();
+                                }
 }
 
   onSelectActivity(): void {
-    if (this.selectedActivityId && this.User) {
-      this.User.idActivity = this.selectedActivityId;
-      this.userService.updateUser(this.User).subscribe((updatedUser: any) => {
-        this.User = updatedUser;
-        this.updateSelectedActivity();
-        console.log('Activity updated:', updatedUser);
-      });
+    if (this.selectedActivityId) {
+      this.selectedActivity = this.activities.find(r => r.id === this.selectedActivityId) || null;
+      console.log('this.selectedActivityId',this.selectedActivityId)
+      if(this.selectedActivity){
+
+        this.userIds.push(this.userId||'')
+        this.selectedActivity.userIds=this.userIds
+        
+        this.activityService.saveActivity(this.selectedActivity).subscribe((addedActivity:any)=>{
+          console.log('addedActivity',this.selectedActivity);
+        console.log('addedActivity',addedActivity);
+        this.selectedActivityId=addedActivity.id
+        this.getAllActivitesByUserId(this.userId);
+        });
+      }
+
     }
   }
 
+  deleteActivity(Activity:any): void {
+if (Activity) {
+  console.log('this.selectedActivity',Activity)
+  //this.selectedActivity.userId = '';
+  
 
-  deleteActivity(): void {
-    if (this.User) {
-      this.User.idActivity = null;
-      this.userService.updateUser(this.User).subscribe((updatedUser: any) => {
-        this.User = updatedUser;
-        this.selectedActivity = null;
-        this.selectedActivityId = null;
-        console.log('Activity removed:', updatedUser);
+  const indexToRemove = Activity.userIds.indexOf(this.userId); // Trouver l'index de l'élément à supprimer
+
+  if (indexToRemove !== -1) {
+    Activity.userIds.splice(indexToRemove, 1); // Supprimer l'élément à cet index
+  }
+  console.log('userId', this.userId);
+  console.log('indexToRemove', indexToRemove);
+  console.log('this.selectedActivity after change', Activity);
+  this.activityService.saveActivity(Activity).subscribe((updateActivity: any) => {
+        console.log('Activity removed:', updateActivity);
+        this.getAllActivitesByUserId(this.userId)
       });
     }
   }
@@ -347,5 +362,20 @@ this.getRegimesByUserIdAndStatusFalse(this.userId || '')
       }
     }
     return null;
+  }
+  listavtivities:Activity[]=[]
+  getAllActivitesByUserId(userId:any): void {
+
+    this.activityService.getActivitesByUserId(userId).subscribe(
+      (data) => {
+        this.selectedActivity = data[0];
+        this.listavtivities=data
+        console.log('Activités récupérées:', this.selectedActivity);
+        console.log('data récupérées:', data);
+      },
+      (error) => {
+        console.error('Erreur lors de la récupération des activités:', error);
+      }
+    );
   }
 }
