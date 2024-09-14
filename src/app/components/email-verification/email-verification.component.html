@@ -1,11 +1,42 @@
-<form (ngSubmit)="verifyEmail()">
-    <div>
-      <label for="email">Votre Email :</label>
-      <input type="email" id="email" [(ngModel)]="email" name="email" placeholder="Entrez votre email" required />
+<div class="container-fluid px-1 px-md-5 px-lg-1 px-xl-5 py-5 mx-auto">
+  <div class="card card0 border-0">
+    <div class="row d-flex">
+      <div class="col-lg-6">
+        <div class="card1 pb-5">
+          <div class="row">
+            <img src="../../assets/img/logo.png" class="logo">
+          </div>
+          <div class="row px-3 justify-content-center mt-4 mb-5 border-line">
+            <img src="../../assets/img/registericon.png" class="image">
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="card2 card border-0 px-4 py-5">
+          <form [formGroup]="loginForm" (ngSubmit)="verifyEmail()">
+            <div class="row px-3" style="margin-top: 30%;">
+          <p style="color: #9cdc47;">
+            {{message}}
+
+          </p>
+              <label class="mb-1">
+                <h6 class="mb-0 text-sm">Adresse e-mail</h6>
+              </label>
+              <input formControlName="email" class="mb-4" type="text" placeholder="Entrez une adresse e-mail valide">
+              <div class="invalid_input" *ngIf="loginForm.get('email')?.hasError('required') && loginForm.get('email')?.touched">
+                L'adresse e-mail est requise.
+              </div>
+              <div class="invalid_input" *ngIf="loginForm.get('email')?.hasError('email') && loginForm.get('email')?.touched">
+                L'adresse e-mail n'est pas valide.
+              </div>
+            </div>
+            <div class="row mb-3 px-3">
+              <button type="reset"routerLink="/login"  class="btn btn-blue text-center" style="margin-right: 3%;">Annuler</button>
+              <button type="submit" class="btn btn-blue text-center">Vérifier</button>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
-    <button type="submit">Envoyer le lien de vérification</button>
-    <div *ngIf="message" [ngClass]="{'success': success, 'error': !success}">
-      {{ message }}
-    </div>
-  </form>
-  
+  </div>
+</div>

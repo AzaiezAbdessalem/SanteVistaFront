@@ -58,7 +58,23 @@ private loginUrl=this.urlBack+'/keycloak/auth/login';
   }
 
  
-
+  getUserRoles(): string[] {
+    const roles = localStorage.getItem('roles');
+    return roles ? JSON.parse(roles) : [];
+  }
+  
+  isAdmin(): boolean {
+    return this.getUserRoles().includes('Admin');
+  }
+  
+  isNutritionist(): boolean {
+    return this.getUserRoles().includes('Nutritionist');
+  }
+  
+  isPatient(): boolean {
+    return this.getUserRoles().includes('Patient');
+  }
+  
 
   login(username: string, password: string): Promise<boolean> {
     return this.http.post(this.loginUrl, { username, password }).toPromise()

@@ -32,7 +32,33 @@ getAllAnalysesByUserId(userId:string)
     }
    )}
 }
+imageSrc:any
 ngOnInit(): void {
+  // this.regimeService.contenuAnalyse('http://example.com/myfile').subscribe(
+  //   (blob) => {
+  //     const objectURL = URL.createObjectURL(blob);
+  //     const fileType = blob.type;  // Obtenir le type de fichier
+  
+  //     // Gestion des différents types de fichiers
+  //     if (fileType.startsWith('image')) {
+  //       // Si c'est une image, l'afficher
+  //       this.imageSrc = objectURL;
+  //     } else if (fileType === 'application/pdf') {
+  //       // Si c'est un PDF, ouvrir dans un nouvel onglet
+  //       window.open(objectURL);
+  //     } else {
+  //       // Pour d'autres types de fichiers, proposer le téléchargement
+  //       const a = document.createElement('a');
+  //       a.href = objectURL;
+  //       a.download = 'downloadedFile';  // Nom du fichier à télécharger
+  //       a.click();
+  //     }
+  //   },
+  //   (error) => {
+  //     console.error('Erreur lors de la récupération du fichier :', error);
+  //   }
+  // );
+  
 
   if( this.userId)
     {

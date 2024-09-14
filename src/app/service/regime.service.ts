@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Regime } from '../class/regime';
 import { environment } from 'src/environments/environment';
@@ -30,7 +30,13 @@ export class RegimeService {
   getAllAnalyses(userId:string): Observable<Analyse[]> {
     return this.http.get<Analyse[]>(`${this.apiUrlAnalyse}/${userId}`);
   }
-
+  contenuAnalyse(imageUrl: string): Observable<Blob> {
+    const params = new HttpParams().set('imageUrl', imageUrl);
+    return this.http.get(`${this.apiUrlAnalyse}/files`, { params, responseType: 'blob' });
+  }
+  
+  
+  
   getAllRegimes(): Observable<Regime[]> {
     return this.http.get<Regime[]>(this.apiUrl);
   }

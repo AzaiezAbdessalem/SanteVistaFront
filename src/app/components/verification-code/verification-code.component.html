@@ -1,0 +1,40 @@
+<div class="container-fluid px-1 px-md-5 px-lg-1 px-xl-5 py-5 mx-auto">
+  <div class="card card0 border-0">
+    <div class="row d-flex">
+      <div class="col-lg-6">
+        <div class="card1 pb-5">
+          <div class="row">
+            <img src="../../assets/img/logo.png" class="logo" alt="Logo">
+          </div>
+          <div class="row px-3 justify-content-center mt-4 mb-5 border-line">
+            <img src="../../assets/img/registericon.png" class="image" alt="Registration Icon">
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="card2 card border-0 px-4 py-5">
+          <form [formGroup]="verificationForm" (ngSubmit)="submitForm()">
+            <div class="row px-3" style="margin-top: 30%;">
+              <p style="color: #9cdc47;">{{msg}}</p>
+              <label class="mb-1">
+                <h6 class="mb-0 text-sm">Code de vérification</h6>
+              </label>
+          
+
+              <input formControlName="code" class="mb-4" type="number" placeholder="Entrez votre code de vérification">
+              <!-- Message d'erreur si le code est invalide -->
+              <div *ngIf="verificationForm.get('code')?.invalid && verificationForm.get('code')?.touched" class="text-danger">
+                <small *ngIf="verificationForm.get('code')?.errors?.['required']">Le code est requis.</small>
+                <small *ngIf="verificationForm.get('code')?.errors?.['pattern']">Le code doit contenir exactement 8 chiffres.</small>
+              </div>
+            </div>
+            <div class="row mb-3 px-3">
+              <button type="reset" routerLink="/login" class="btn btn-blue text-center" style="margin-right: 3%;">Annuler</button>
+              <button type="submit" class="btn btn-blue text-center" [disabled]="verificationForm.invalid">Vérifier</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -11,9 +11,10 @@ export class NavbarComponent implements OnInit {
 
   constructor(private router: Router,private authService: AuthService,) { }
   isAuthenticated: boolean = false;
-  Patient:boolean=false
-  Nutritionist:boolean=false
-  Admin:boolean=false
+
+  isAdmin: boolean = false;
+  isNutritionist: boolean = false;
+  isPatient: boolean = false;
   profile()
   {
     this.router.navigate(['/profile']);
@@ -27,23 +28,13 @@ export class NavbarComponent implements OnInit {
   }
 fullname:any
   ngOnInit(): void {
-    this.authService.isLoggedIn.subscribe((authStatus) => {
-      this.fullname=localStorage.getItem("fullname")
-      this.isAuthenticated = authStatus;
+    this.authService.isLoggedIn.subscribe(isLoggedIn => {
+      this.isAuthenticated = isLoggedIn;
+      this.isAdmin = this.authService.isAdmin();
+      this.isNutritionist = this.authService.isNutritionist();
+      this.isPatient = this.authService.isPatient();
+      this.fullname = localStorage.getItem('fullname');
     });
-    const roles = localStorage.getItem('roles');
-    if (roles) {
-      const parsedRoles = JSON.parse(roles);
-      // Vérifier si "Patient" est dans les rôles
-      if (parsedRoles.includes('Patient')) {
-        this.Patient=true;
-      }else if(parsedRoles.includes('Nutritionist')){
-        this.Nutritionist=true;
-      }
-      else{
-        this.Admin=true;
-      }
 
-  }
   }
 }

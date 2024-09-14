@@ -17,14 +17,18 @@ import { PatientListComponent } from './components/patient-list/patient-list.com
 import { FicheDesuiviComponent } from './components/fiche-desuivi/fiche-desuivi.component';
 import { RendezVousListComponent } from './components/rendez-vous-list/rendez-vous-list.component';
 import { EmailVerificationComponent } from './components/email-verification/email-verification.component';
+import { VerificationCodeComponent } from './components/verification-code/verification-code.component';
+import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 
 const routes: Routes = [
 
   {path:"", component: HomeComponent},
   {path:"login", component: LoginComponent},
+  {path:"resetPassword", component: ResetPasswordComponent},
   {path:"register", component: RegisterComponent},
   {path:"users", component: UserManagementComponent},
   {path:"verifMailofAccount", component: EmailVerificationComponent},
+  {path:"verify", component: VerificationCodeComponent},
   {path:"profile", component: ProfileComponent},
   {path:"steps", component: InformationsStepsComponent},
   {path:"informations", component: InformationsComponent},
